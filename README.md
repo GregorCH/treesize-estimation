@@ -70,3 +70,20 @@ install.packages(c("magrittr", "dplyr", "forecast", "ggplot2")) from within an R
 ```
 
 In order to render the HTML report, you also need to install the package "rmarkdown".
+
+
+## Meaning of the CSV columns
+
+The error tables contain a lot of data. Here is the explanation of the column names:
+
+- **X1**: Index within a single problem/method combination
+- **Method**: One of "des-paper", "ets", or "w-linear"
+- **rmsd**: "Root mean square deviation between the progress forecast and the actual curve
+- **mae{Prog,Freq}**: Mean Absolute Error of the forecast curves for progress and leaf frequency
+- **mapeRes**: "Mean Average Precision Error" of the resource forecast
+- **Estim{Prog,Freq,Res}**: Tree Size Estimation of the corresponding method
+- **Error{Prog,Freq,Res}**: Error measure log2(Estim/Actual)
+- **Actual**: The actual tree size at termination
+- **Current**: The current number of visited nodes (when the estimation was made)
+- **Level**: The amount of cumulative progress when this observation has been made
+- **Prob**: MIP Instance identifier
