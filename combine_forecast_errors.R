@@ -12,6 +12,7 @@ writeBigTable <- function(tables, path, filename, stripexpression="\\.p_u_.*") {
   dflist <- list()
   for(t in tables){
     df <- read_csv("%s/%s" %>% sprintf(path,t))
+    print("%s/%s" %>% sprintf(path,t))
     df$Prob <- gsub(stripexpression, "", t)
     dflist[[length(dflist) + 1]] <- df
   }
@@ -24,5 +25,5 @@ writeBigTable(uniformtables,
               "uniform_errors.csv")
 
 # glue all nonuniform tables together
-nonuniformtables <- dir(path="tables/nonuniform/", pattern = "*.csv")
-writeBigTable(nonuniformtables, "tables/nonuniform/", "nonuniform_errors.csv", stripexpression = "\\.p_k_.*")
+# nonuniformtables <- dir(path="tables/nonuniform/", pattern = "*.csv")
+# writeBigTable(nonuniformtables, "tables/nonuniform/", "nonuniform_errors.csv", stripexpression = "\\.p_k_.*")

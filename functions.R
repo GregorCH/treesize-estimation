@@ -37,6 +37,7 @@ probsFile2dataFrame <- function(filename, maxsize=1000) {
     mutate(CumProgress=cumsum(Progress))
   df$LeafFreq <- (1:nrow(df) / df$Visited) - 1 / (2 * df$Visited)
   df$Leaves <- 1:nrow(df)
+  df$NodeSurplus <- df$Visited - 2 * df$Leaves + 1
   if( nrow(df) > maxsize )
   {
     rate <- 2 ** ceiling(log2(nrow(df) / maxsize))
@@ -65,6 +66,10 @@ makeForecast <- function(df, steps=100, method="ets", target="CumProgress", wind
     Visited=list(
       bounds=c(0,NULL),
       increasing=TRUE
+    ),
+    NodeSurplus=list(
+      bounds=c(0,NULL),
+      increasing=FALSE
     )
   )
   if( method == "arima" && nrow(df) <= 2 )
@@ -177,8 +182,8 @@ makeForecastDf <- function(df) {
                Forecast=do.call(c, lapply(mylevels,
                                           FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear"))
                ),
-               ForecastRes=do.call(c, lapply(mylevels,
-                                              FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "Visited")
+               ForecastSur=do.call(c, lapply(mylevels,
+                                              FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "NodeSurplus")
                                              )
                                    ),
               ForecastFreq=do.call(c, lapply(mylevels,
@@ -195,8 +200,8 @@ makeForecastDf <- function(df) {
                Forecast=do.call(c, lapply(mylevels,
                                           FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear", windowsize = 2))
                ),
-               ForecastRes=do.call(c, lapply(mylevels,
-                                             FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "Visited", windowsize = 2)
+               ForecastSur=do.call(c, lapply(mylevels,
+                                             FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "NodeSurplus", windowsize = 2)
                )
                ),
                ForecastFreq=do.call(c, lapply(mylevels,
@@ -210,8 +215,8 @@ makeForecastDf <- function(df) {
     #            Forecast=do.call(c, lapply(mylevels,
     #                                     FUN = function(x) makeProgressSplitForecast(df, x, method = "w-quadratic"))
     #                           ),
-    #                           ForecastRes=do.call(c, lapply(mylevels,
-    #                                     FUN = function(x) makeProgressSplitForecast(df, x, method = "w-quadratic", target = "Visited"))
+    #                           ForecastSur=do.call(c, lapply(mylevels,
+    #                                     FUN = function(x) makeProgressSplitForecast(df, x, method = "w-quadratic", target = "NodeSurplus"))
     #                           )
     #           ),
     # data.frame(Visited=rep(df$Visited, length(mylevels)),
@@ -229,8 +234,8 @@ makeForecastDf <- function(df) {
                Forecast=do.call(c, lapply(mylevels,
                                           FUN = function(x) makeProgressSplitForecast(df, x, method = "des-paper"))
                ),
-               ForecastRes=do.call(c, lapply(mylevels,
-                                              FUN = function(x) makeProgressSplitForecast(df, x, method = "des-paper", target = "Visited"))
+               ForecastSur=do.call(c, lapply(mylevels,
+                                              FUN = function(x) makeProgressSplitForecast(df, x, method = "des-paper", target = "NodeSurplus"))
                ),
                ForecastFreq=do.call(c, lapply(mylevels,
                                               FUN= function(x) makeProgressSplitForecast(df, x, method = "des-paper", target = "LeafFreq")
@@ -246,8 +251,8 @@ makeForecastDf <- function(df) {
                Forecast=do.call(c, lapply(mylevels,
                                           FUN = function(x) makeProgressSplitForecast(df, x, method = "ets"))
                ),
-               ForecastRes=do.call(c, lapply(mylevels,
-                                              FUN = function(x) makeProgressSplitForecast(df, x, method = "ets", target = "Visited"))
+               ForecastSur=do.call(c, lapply(mylevels,
+                                              FUN = function(x) makeProgressSplitForecast(df, x, method = "ets", target = "NodeSurplus"))
                ),
                ForecastFreq=do.call(c, lapply(mylevels,
                                               FUN= function(x) makeProgressSplitForecast(df, x, method = "ets", target = "LeafFreq")
@@ -259,13 +264,14 @@ makeForecastDf <- function(df) {
 }
 
 progressPlot <- function(df, title, forecastdf = makeForecastDf(df), visibleforecasts=NULL) {
+  maxsurplus <- max(df$NodeSurplus) + 1
   g<- ggplot(df, aes(Leaves, CumProgress, col="Progress")) +
     geom_line(size=1.2) +
-    geom_line(size=1.2, aes(y=Visited / df$Visited[nrow(df)], col="Ressource")) +
+    geom_line(size=1.2, aes(y=NodeSurplus / maxsurplus, col="NodeSurplus")) +
     geom_line(size=1.2, aes(y=LeafFreq, col="Leaf Frequency")) +
-    ggtitle(title, subtitle = "Progress, Ressource consumption, Leaf Frequency") +
-    xlab("Leaves") + ylab("Progress/Leaf Frequency") +
-    scale_y_continuous(sec.axis = sec_axis(~.*df$Visited[nrow(df)], name = "Ressource"))
+    ggtitle(title, subtitle = "Progress, Node Surplus, Leaf Frequency") +
+    xlab("Leaves (resolution: 1/%d)" %>% sprintf(df$Leaves[1])) + ylab("Progress/Leaf Frequency") +
+    scale_y_continuous(sec.axis = sec_axis(~.*maxsurplus, name = "Node Surplus"))
 
   if( is.null(visibleforecasts) )
     visibleforecasts <- unique(forecastdf$Method)
@@ -286,7 +292,6 @@ summarizeForecastdf <- function(df, forecastdf=makeForecastDf(df)) {
   forecastdf %>% dplyr::filter(Predicted) %>% group_by(Method) %>% summarise(
     rmsd=((Forecast - CumProgress) ** 2) %>% mean() %>% sqrt(),
     maeProg=mean(abs(Forecast - CumProgress)),
-    mapeRes=mean(log2(ForecastRes / Visited)),
     maeFreq=mean(abs(ForecastFreq - LeafFreq))
   )
 }
@@ -349,10 +354,10 @@ getPredictionsFromForecast <- function(forecastdf) {
     }
   }
   # make a prediction from the ressource forecast
-  resourcelinfunc <- forecastdf$ForecastRes - 2 * forecastdf$Leaves + 1
+  resourcelinfunc <- forecastdf$ForecastSur
   if( min(resourcelinfunc) <= 0 ) {
     leafidx <- Position(function(x) x <= 0.0, resourcelinfunc)
-    EstimRes <- 2 * forecastdf$Leaves[leafidx] - 1
+    EstimSur <- 2 * forecastdf$Leaves[leafidx] - 1
   }
   else
   {
@@ -369,10 +374,10 @@ getPredictionsFromForecast <- function(forecastdf) {
     if( slope < 0 )
     {
       estimleaves <- (0.0 - resourcelinfunc[n]) / slope + forecastdf$Leaves[n]
-      EstimRes <- 2 * estimleaves - 1
+      EstimSur <- 2 * estimleaves - 1
     }
     else
-      EstimRes <- 2 * forecastdf$VisitedAtSplit[1]
+      EstimSur <- 2 * forecastdf$VisitedAtSplit[1]
   }
 
 
@@ -380,10 +385,10 @@ getPredictionsFromForecast <- function(forecastdf) {
   actual <- forecastdf$Visited[n]
   return(data.frame(EstimProg=EstimProg,
                     EstimFreq=EstimFreq,
-                    EstimRes=EstimRes,
+                    EstimSur=EstimSur,
                     ErrorProg=getPredictionError(EstimProg, actual),
                     ErrorFreq=getPredictionError(EstimFreq, actual),
-                    ErrorRes=getPredictionError(EstimRes, actual)
+                    ErrorSur=getPredictionError(EstimSur, actual)
                     )
          )
 }
@@ -407,7 +412,7 @@ summarize_one_forecast <- function(df, rellevel, method="ets", windowsize=defaul
              VisitedAtSplit=rep(df$Visited[trainEnd], nrow(df)),
              Method=method,
              Forecast=makeProgressSplitForecast(df, rellevel, method = method, windowsize = windowsize),
-             ForecastRes=makeProgressSplitForecast(df, rellevel, method = method, target = "Visited", windowsize = windowsize),
+             ForecastSur=makeProgressSplitForecast(df, rellevel, method = method, target = "NodeSurplus", windowsize = windowsize),
              ForecastFreq=makeProgressSplitForecast(df, rellevel, method = method, target = "LeafFreq", windowsize = windowsize)
   )
 
