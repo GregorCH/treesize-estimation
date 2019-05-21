@@ -8,12 +8,12 @@ source("functions.R")
 # glue all uniform tables together.
 uniformtables <- dir(path="tables/uniform/", pattern = "*.csv")
 
-writeBigTable <- function(tables, path, filename, stripexpression="\\.p_u_.*") {
+writeBigTable <- function(tables, path, filename, stripexpression=".csv") {
   dflist <- list()
   for(t in tables){
     df <- read_csv("%s/%s" %>% sprintf(path,t))
     print("%s/%s" %>% sprintf(path,t))
-    df$Prob <- gsub(stripexpression, "", t)
+    df$Prob <- gsub(" ", "_", df$Method) %>% sprintf("_%s.csv", .) %>% gsub("", t)
     dflist[[length(dflist) + 1]] <- df
   }
   dflist %>% bind_rows() %>% write.csv(filename)

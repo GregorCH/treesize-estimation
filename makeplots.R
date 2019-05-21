@@ -8,7 +8,7 @@ library(ggplot2)
 source("functions.R")
 datafiles <- c("uniform_errors.csv")
 
-measurements <- c("maeProg", "maeFreq", "ErrorProg", "ErrorFreq", "ErrorSur")
+measurements <- c("ErrorProg", "ErrorFreq", "ErrorUns")
 
 for( d in datafiles )
 {
@@ -23,7 +23,7 @@ for( d in datafiles )
       scale_fill_brewer(palette = "Accent") +
       xlab("Progress") + ylab("Prediction Error log_2(pred/actual)")
 
-    ggsave("%s_%s.png" %>% sprintf(gsub(".csv", "", d), m), units = "in", width = 12, height = 7)
+    ggsave("%s_%s.pdf" %>% sprintf(gsub(".csv", "", d), m), units = "in", width = 12, height = 7)
   }
 }
 

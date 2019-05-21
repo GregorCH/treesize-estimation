@@ -9,8 +9,8 @@ if(! dir.exists("tables") ) {
   dir.create("tables")
 }
 
-# make 75 forecasts ranging from 1% to 75 % of the cumulative progress.
-rellevels <- seq(0.01, 0.75, by = 0.01)
+# make 95 forecasts ranging from 1% to 95 % of the cumulative progress.
+rellevels <- seq(0.01, 0.95, by = 0.01)
 
 # summarize each forecast
 datafiles <- getDataFilesInPath("../MMMc_v3")
@@ -43,7 +43,7 @@ for(d in uniformdatafiles) {
         mutate(Level=problemspecificrellevels,
                Method = methodname) %>%
         as.data.frame() %>%
-        write.csv("tables/%s_%s.csv" %>%
+        write.csv("tables/uniform/%s_%s.csv" %>%
                     sprintf(progressPlotTitle(d), methodname %>% gsub(" ", "_", .))
                   )
     }
