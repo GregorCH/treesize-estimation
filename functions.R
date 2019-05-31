@@ -289,7 +289,7 @@ progressPlot <- function(df, title, forecastdf = makeForecastDf(df), visiblefore
   g
 }
 
-simultaneousplot <- function(df, errordf, title="Plot") {
+simultaneousplot <- function(df, errordf, title="Plot", target = "save") {
   g1 <- ggplot(df, aes(Leaves, CumProgress)) + geom_line() + ylab("Progress")
   g2 <- ggplot(df, aes(Leaves, LeafFreq)) + geom_line() + ylab("Leaf Frequency")
   g3 <- ggplot(df, aes(Leaves, UnsolvedNodes)) + geom_line() + ylab("Unsolved Nodes")
@@ -310,7 +310,10 @@ simultaneousplot <- function(df, errordf, title="Plot") {
     geom_hline(yintercept = actualnodes) + theme(legend.position = "bottom") +
     xlim(c(0, maxnleaves)) + ylab("Estimation (Unsolved Nodes)")
 
-  gridExtra::arrangeGrob(g1,g2,g3,g4,g5,g6, nrow=2, padding = 1000)
+  if( target == "save" )
+    gridExtra::arrangeGrob(g1,g2,g3,g4,g5,g6, nrow=2, padding = 1000)
+  else
+    gridExtra::grid.arrange(g1,g2,g3,g4,g5,g6, nrow=2)
 }
 
 

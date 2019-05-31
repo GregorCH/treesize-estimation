@@ -24,162 +24,38 @@ if( ! dir.exists("plots") ) {
   dir.create("plots")
 }
 
-datafiles <- getDataFilesInPath(params$path)
-# use only one data file for quick coding
-if( ! params$full )
-  datafiles <- c("./Data/uniform/stein45.p_u.probs", "./Data/phi/stein45.p_k.probs")
-uniformdatafiles <- datafiles %>% grep("Data/uniform", ., value = T) 
-nonuniformdatafiles <- datafiles %>% grep("Data/phi", ., value = T)
+errors <- read.csv("uniform_errors.csv")
 
-if( min(length(uniformdatafiles), length(uniformdatafiles)) == 0 )
-{
-  stop("Too few data files:\n%s" %>% sprintf(datafiles))
-}
+probs <- errors$Prob %>% unique()
+
+datafiles <- "../MMMc_v3/Data/uniform/%s.p_u.probs" %>% sprintf(probs)
 
 ```
 
-```{r error_collection}
-  uniform_errors <- data.frame()
-  for (d in uniformdatafiles)
-  {
-    df <- probsFile2dataFrame(d)
-    if(nrow(df) < params$minsize)
-      next
-    uniform_errors <- rbind(uniform_errors, summarizeForecastdf(df) %>% as.data.frame())
-  }
-  phi_errors <- data.frame()
-  for (d in nonuniformdatafiles)
-  {
-    df <- probsFile2dataFrame(d)
-    if(nrow(df) < params$minsize)
-      next
-    phi_errors <- rbind(phi_errors, summarizeForecastdf(df) %>% as.data.frame())
-  }
-```
+## Visualization of Sample Trees
 
+The following pictures show the actual search progress, the leaf frequency, and the number of unsolved nodes as a function of the number of leaves.
+The curves in the second row depict the evolution of the estimation.
 
-## Introduction
-
-- the origin of the progress data
-
-This document summarizes the reliability of several different time series forecasting techniques for branch-and-bound search in SCIP.
-The data has been obtained by running SCIP version 6.0 and writing out the tree in vbc-format.
-The plots show the total search progress as a function of the number of leaf nodes. With
-every leaf node, the search progress is updated by the weight of this leaf.
-Depending on the used arc weights (uniform or non-uniform), the progress curves may have very different shapes.
-
-- Ressource is number of visited nodes. 
-
-- Using nodes as ressources, the velocity of the ressource consumption (slope of the tangent) approaches 1, corresponding to every remaining node being a leaf.
-
-- Relationship between ressources and leaf nodes at termination
-
-- Ressource consumption is a time series by itself, and can be forecasted
-
-- Important point: There is a discrepancy between the nodes visited in our model trees, and the number of solving nodes that SCIP reports.
-
-
-
-## Methods used
-
-This paragraph briefly summarizes the time-series forecasting methods that we use.
-
-### Own methods
-
-The following are self-implemented methods with a focus on speed. 
-
-#### Window linear
-
-This method uses a fixed window size $w$, which defaults to $w = 50$ like in the AAAI paper. It uses the first and last observation in that window.
-
-#### Window quadratic
-
-Use a quadratic fit on the first, last, and mid observation within the window.
-
-
-#### DES
-
-Double-exponential smoothing with fixed parameters $\alpha=\beta=0.15$, as used in our paper.
-
-### Reference methods
-
-#### ETS (Exponential smoothing state space model)
-
-Self-optimizing exponential smoothing as described in Hyndman et al (2008), restricted to additive models with no seasonality.
-
-#### ARIMA
-
-ARIMA implementation of R, currently not working because of artifacts in our time series that require further debugging.
-
-## Resolution Change
-
-On larger data sets in earlier versions of this report, we have occasionally encountered a very odd behavior of the forecasting methods despite a seemingly smooth, nearly linear search progress.
-Besides, we sometimes exceed laptop memory when trying to use forecasting methods in R for larger data frames (trees with more than 1 mio leaves).
-
-- explanation of resolution change at base $ b $
-- advantages of resolution change: more global trends for larger trees, automatic adaptation of window.
-- compare resolution change for bases 2 and 10, explain advantages of basis 10 for window adaptation
-
-## Accuracy of Prediction Methods
-
-The tables show the accuracy of the fitted curve in terms of the root mean squared error and the mean absolute error for both uniform and non-uniform progress.
-
-- definition of root mean square error
-- definition of mean absolute error
-
-<!-- <div class="row"> -->
-<!-- <div class="col-md-6"> -->
-
-### Errors for uniform arc weights
-
-```{r}
-  error_summary <- uniform_errors %>% group_by(Method) %>% summarize(mean.maeProg=mean(maeProg), mean.maeFreq=mean(maeFreq))
-  knitr::kable(error_summary, caption = "Summary of errors for uniform progress", digits = 3)
-```
-
-<!-- </div> -->
-
-<!-- <div class="col-md-6"> -->
-
-<!-- ### Errors for non-uniform arc weights -->
-
-<!-- ```{r} -->
-<!--   error_phi_summary <- phi_errors %>% group_by(Method) %>% summarize(mean.maeProg=mean(maeProg), mean.maeFreq=mean(maeFreq), mean.mapeRes=mean(mapeRes)) -->
-<!--   knitr::kable(error_phi_summary, caption = "Summary of errors for phi progress", digits = 3) -->
-<!-- ``` -->
-
-<!-- </div> -->
-<!-- </div> -->
-
-
-## Visualization of Progress for Sample Trees
-
-The following pictures show the actual search progress, as well as forecasted curves for different selected methods.
-
-
-- 1 plot per instances for the progress as a function of nodes (aka ressources). One could also plot the leaf frequency, which should increase towards the end of the search.
-
-<!-- <div class="row"> -->
-<!-- <div class="col-md-6"> -->
-<!-- ### Uniform Arc Weights -->
 
 ```{r uniform_arc_weights, echo=FALSE, results="asis"}
 
-for (d in uniformdatafiles)
+for (d in 1:ifelse(params$full, length(datafiles), 10))
 {
-  df <- probsFile2dataFrame(d)
+  df <- probsFile2dataFrame(datafiles[d])
+  errordf <- errors %>% subset(Prob == probs[d])
   if(nrow(df) < params$minsize)
     next
-  forecastdf <- makeForecastDf(df)
-  s <- summarizeForecastdf(df, forecastdf) %>% as.data.frame()
-  visibleforecasts <- s[order(s$rmsd), "Method"]
-  visibleforecasts <- visibleforecasts[c(1:4, nrow(s))]
-  g <-  df %>% progressPlot(title = progressPlotTitle(d), forecastdf = forecastdf, visibleforecasts = visibleforecasts)
-  print(g)
+  # 
+  cat("<h3>%s</h3>\n" %>% sprintf(probs[d] %>% as.character()))
   
-  ggsave("plots/%s.png" %>% sprintf(progressPlotTitle(d)))
+  # knitr::kable(errordf %>% dplyr::select(EstimProg, EstimFreq, EstimUns, ErrorProg, ErrorFreq, ErrorUns, Actual, Current, Leaves, Level, Method)
+               # , format = "html", booktabs=T) %>% kableExtra::kable_styling() %>% print() 
   
-  print(knitr::kable(s,  digits = 3))
+  simultaneousplot(df, errordf, title = probs[d], target = "print")
+  
+  # 
+  # ggsave("plots/%s.png" %>% sprintf(progressPlotTitle(datafiles[d])))
 }
 ```
 
