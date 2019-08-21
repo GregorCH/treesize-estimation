@@ -11,6 +11,8 @@ require(forecast)
 
 defaultwindowsize=50
 
+# scan a given path for the data (.probs) files it contains. An exclude.list file can be used to
+# forbid certain files explicitly
 getDataFilesInPath <- function(path) {
   datafiles <- dir(path=path, pattern=".probs$", recursive = T)
   datafiles <- paste(path, datafiles, sep = "/")
@@ -32,35 +34,40 @@ getDataFilesInPath <- function(path) {
   datafiles
 }
 
-probsFile2dataFrame <- function(filename, maxsize=1000) {
-  df <- read.table(filename, quote="\"", col.names = c("Progress", "Visited")) %>%
+#
+# converts a PROBS file into a data frame to work with.
+#
+probsFile2dataFrame <- function(filename, maxsize=1024) {
+  df <- read.table(filename, quote="\"", col.names = c("Progress", "Visited", "Ssg")) %>%
     mutate(CumProgress=cumsum(Progress))
   df$LeafFreq <- (1:nrow(df) / df$Visited) - 1 / (2 * df$Visited)
   df$Leaves <- 1:nrow(df)
   df$UnsolvedNodes <- df$Visited - 2 * df$Leaves + 1
-  if( nrow(df) > maxsize )
-  {
-    rate <- 2 ** ceiling(log2(nrow(df) / maxsize))
-    # print(rate)
-    index <- seq(rate,nrow(df), by = rate)
-    df <- df[index,]
-  }
+  df$Reso <- 2 ** ceiling(log2(ceiling(df$Leaves / maxsize)))
+
+  df <- subset(df, df$Leaves %% df$Reso == 0)
   df
 }
 
+#
+# converts a file name into a title for a plot (that contains the instance)
+#
 progressPlotTitle <- function(filename) {
   filename %>% basename() %>% gsub(".probs$", "", .) %>% gsub("\\.p_[uk]", "", .)
 }
 
 
-makeForecast <- function(df, steps=100, method="ets", target="CumProgress", windowsize=defaultwindowsize) {
+#
+# make forecast for a target column and specified number of steps into the future. Different methods are available
+#
+makeForecast <- function(df, steps=100, method="ets", target="CumProgress", windowsize=defaultwindowsize, alphabeta=c(0.95,0.1)) {
   features <- list(
     CumProgress=list(
       bounds=c(0.0,1.0),
       increasing=TRUE
     ),
     LeafFreq=list(
-      bounds=c(0.0, 0.5),
+      bounds=c(-0.5, 0.5),
       increasing=FALSE
     ),
     Visited=list(
@@ -69,6 +76,10 @@ makeForecast <- function(df, steps=100, method="ets", target="CumProgress", wind
     ),
     UnsolvedNodes=list(
       bounds=c(0,NULL),
+      increasing=FALSE
+    ),
+    Ssg=list(
+      bounds=c(0.0,1.0),
       increasing=FALSE
     )
   )
@@ -79,7 +90,7 @@ makeForecast <- function(df, steps=100, method="ets", target="CumProgress", wind
     if( method == "ets" )
       alphabeta <- rep(NULL, 2)
     else
-      alphabeta <- rep(0.15, 2)
+      alphabeta <- alphabeta
 
     mod <- ets(df[,target], model = "AAN",
                additive.only = TRUE,
@@ -144,26 +155,124 @@ makeForecast <- function(df, steps=100, method="ets", target="CumProgress", wind
   if(! is.na(upper))
     result <- pmin(result, upper)
 
-
-
   return(result)
 }
 
-makeSplitForecast <- function(df, x, method = "ets", target="CumProgress", windowsize=defaultwindowsize) {
-  trainEnd <- ceiling(x * nrow(df))
-  f <- makeForecast(df[1:trainEnd,], nrow(df) - trainEnd, method = method, target = target, windowsize = windowsize)
-  f
-}
-
+# determine a split position based on progress
 getProgressSplitPosition <- function(df, x) {
   trainEnd <- base::Position(function(y) y >= x, df$CumProgress)
   trainEnd <- max(min(3, nrow(df)), trainEnd)
   trainEnd
 }
 
-makeProgressSplitForecast <- function(df, x, method = "ets", target="CumProgress", windowsize=defaultwindowsize) {
+# compute prediction error
+getPredictionError <- function(prediction, actual) {
+  log2(prediction / actual)
+}
+
+# Search the data frame for subset of Progress levels that are reached
+getProblemSpecificRellevels <- function(df, rellevels) {
+  roundedprogress <- (df$CumProgress * 100) %>% as.integer(.) / 100
+  indices <- lapply(rellevels, function(x) getProgressSplitPosition(df, x)) %>% unlist()
+  indices <- indices[!is.na(indices)]
+  indices <- indices[indices < nrow(df)]
+  result <- roundedprogress[unique(indices)]
+  # discard rellevels that are too big
+  result[result <= max(rellevels)]
+}
+
+getLinearPrediction <- function(level, trend, targetlevel) {
+  # return the number of steps until target level is reached from current trend
+  h = ceiling((targetlevel - level) / trend)
+  return(h)
+}
+
+# estimate termination of the search with a linear forecast of the number of steps until the target level is reached
+estimateLinear <- function(training_data, method, target, windowsize, alphabeta) {
+  # filter only the training observations.
+  targetvalues <- list(
+    CumProgress=1.0,
+    LeafFreq=0.5,
+    UnsolvedNodes=0.0,
+    Ssg=0.0
+  )
+
+  f <- makeForecast(training_data,
+                    steps = 1,
+                    method = method,
+                    target = target,
+                    windowsize = windowsize,
+                    alphabeta = alphabeta
+  )
+  level <- f[nrow(training_data)]
+  trend <- f[length(f)] - f[length(f) - 1]
+  print(sprintf("Level %f, trend %f", level, trend))
+  trainingResolution <- training_data$Reso[nrow(training_data)]
+  estimation.no.resolution <- getLinearPrediction(level, trend, targetvalues[[target]])
+  print(estimation.no.resolution)
+
+  # na's or inf's or trends that show into the wrong direction are treated separately. In this case, we
+  # simply estimate that at least twice the number of nodes is necessary to complete the search.
+  if( estimation.no.resolution < 0 || is.na(estimation.no.resolution) || is.infinite(estimation.no.resolution) )
+  {
+    estimation <- 2 * training_data$Visited[nrow(training_data)]
+  }
+  else {
+    # use the estimation of the number of steps, consider also training resolution
+    estimation.resolution <- training_data$Leaves[nrow(training_data)] + trainingResolution * estimation.no.resolution
+
+    # multiply the estimated number of leaves at termination by 2 to get an estimation of the total tree size
+    estimation <- 2 * estimation.resolution - 1
+  }
+  return(estimation)
+}
+
+# summarize estimation accuracy for all target time series at a specific progress level
+summarize_one_forecast_linear <- function(df,
+                             rellevel,
+                             method="ets",
+                             windowsize=defaultwindowsize,
+                             alphabeta=c(0.95,0.1)) {
+
+  # determine the position at which rellevel is reached
+  trainEnd <- getProgressSplitPosition(df, rellevel)
+
+  # filter only the training observations.
+  trainingResolution <- df$Reso[trainEnd]
+
+  df_train <- df[1:trainEnd,] %>% dplyr::filter( (Leaves %% trainingResolution == 0) )
+
+  targetlist <- c("CumProgress", "LeafFreq", "UnsolvedNodes", "Ssg")
+
+  estimations <- lapply(targetlist, function(x) estimateLinear(df_train, method = method, target = x, windowsize = windowsize, alphabeta = alphabeta))
+  names(estimations) <- c("EstimProg", "EstimFreq", "EstimUns", "EstimSsg")
+  estimations <- estimations %>% as.data.frame()
+  actual <- df$Visited[nrow(df)]
+  leaves=df$Leaves[trainEnd]
+  errors <- getPredictionError(estimations, actual)
+  names(errors) <- c("ErrorProg", "ErrorFreq", "ErrorUns", "ErrorSsg")
+  errors <- errors %>% as.data.frame()
+  cbind(
+    estimations %>% as.data.frame(),
+    errors,
+    data.frame(Actual=actual,
+               Current=df$Visited[trainEnd],
+               Leaves=leaves
+    )
+  )
+}
+
+
+
+
+
+####################################################
+# Functions for plotting                           #
+####################################################
+
+makeProgressSplitForecast <- function(df, x, method = "ets", target="CumProgress", windowsize=defaultwindowsize, alphabeta=c(0.95,0.1)) {
   trainEnd <- getProgressSplitPosition(df, x)
-  f <- makeForecast(df[1:trainEnd,], nrow(df) - trainEnd, method = method, target = target, windowsize = windowsize)
+  f <- makeForecast(df[1:trainEnd,], nrow(df) - trainEnd, method = method, target = target, windowsize = windowsize, alphabeta = alphabeta)
   f
 }
 
@@ -183,48 +292,14 @@ makeForecastDf <- function(df) {
                                           FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear"))
                ),
                ForecastUns=do.call(c, lapply(mylevels,
-                                              FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "UnsolvedNodes")
-                                             )
-                                   ),
-              ForecastFreq=do.call(c, lapply(mylevels,
-                                             FUN= function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "LeafFreq")
-                                            )
-                                  )
+                                             FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "UnsolvedNodes")
+               )
+               ),
+               ForecastFreq=do.call(c, lapply(mylevels,
+                                              FUN= function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "LeafFreq")
+               )
+               )
     ),
-    # data.frame(Visited=rep(df$Visited, length(mylevels)),
-    #            Leaves=rep(df$Leaves, length(mylevels)),
-    #            LeafFreq=rep(df$LeafFreq, length(mylevels)),
-    #            CumProgress=rep(df$CumProgress, length(mylevels)),
-    #            VisitedAtSplit=VisitedAtSplitCol,
-    #            Method=paste("B window (linear, w=2) ", rep(mylevels, each=nrow(df))),
-    #            Forecast=do.call(c, lapply(mylevels,
-    #                                       FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear", windowsize = 2))
-    #            ),
-    #            ForecastUns=do.call(c, lapply(mylevels,
-    #                                          FUN = function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "UnsolvedNodes", windowsize = 2)
-    #            )
-    #            ),
-    #            ForecastFreq=do.call(c, lapply(mylevels,
-    #                                           FUN= function(x) makeProgressSplitForecast(df, x, method = "w-linear", target = "LeafFreq", windowsize = 2)
-    #            )
-    #            )
-    # ),
-    # data.frame(Visited=rep(df$Visited, length(mylevels)),
-    #            Leaves=rep(df$Leaves, length(mylevels)),
-    #            Method=paste("B window (quadratic, w=50) ", rep(mylevels, each=nrow(df))),
-    #            Forecast=do.call(c, lapply(mylevels,
-    #                                     FUN = function(x) makeProgressSplitForecast(df, x, method = "w-quadratic"))
-    #                           ),
-    #                           ForecastUns=do.call(c, lapply(mylevels,
-    #                                     FUN = function(x) makeProgressSplitForecast(df, x, method = "w-quadratic", target = "UnsolvedNodes"))
-    #                           )
-    #           ),
-    # data.frame(Visited=rep(df$Visited, length(mylevels)),
-    #            Method=paste("C Arima (0,2,1) ", rep(mylevels, each=nrow(df))),
-    #            Forecast=do.call(c, lapply(mylevels,
-    #                                     FUN = function(x) makeProgressSplitForecast(df, x, method = "arima"))
-    #                           )
-    #           ),
     data.frame(Visited=rep(df$Visited, length(mylevels)),
                Leaves=rep(df$Leaves, length(mylevels)),
                LeafFreq=rep(df$LeafFreq, length(mylevels)),
@@ -235,11 +310,11 @@ makeForecastDf <- function(df) {
                                           FUN = function(x) makeProgressSplitForecast(df, x, method = "des-paper"))
                ),
                ForecastUns=do.call(c, lapply(mylevels,
-                                              FUN = function(x) makeProgressSplitForecast(df, x, method = "des-paper", target = "UnsolvedNodes"))
+                                             FUN = function(x) makeProgressSplitForecast(df, x, method = "des-paper", target = "UnsolvedNodes"))
                ),
                ForecastFreq=do.call(c, lapply(mylevels,
                                               FUN= function(x) makeProgressSplitForecast(df, x, method = "des-paper", target = "LeafFreq")
-                                    )
+               )
                )
     ),
     data.frame(Visited=rep(df$Visited, length(mylevels)),
@@ -252,7 +327,7 @@ makeForecastDf <- function(df) {
                                           FUN = function(x) makeProgressSplitForecast(df, x, method = "ets"))
                ),
                ForecastUns=do.call(c, lapply(mylevels,
-                                              FUN = function(x) makeProgressSplitForecast(df, x, method = "ets", target = "UnsolvedNodes"))
+                                             FUN = function(x) makeProgressSplitForecast(df, x, method = "ets", target = "UnsolvedNodes"))
                ),
                ForecastFreq=do.call(c, lapply(mylevels,
                                               FUN= function(x) makeProgressSplitForecast(df, x, method = "ets", target = "LeafFreq")
@@ -273,19 +348,8 @@ progressPlot <- function(df, title, forecastdf = makeForecastDf(df), visiblefore
     xlab("Leaves (resolution: 1/%d)" %>% sprintf(df$Leaves[1])) + ylab("Progress/Leaf Frequency") +
     scale_y_continuous(sec.axis = sec_axis(~.*maxunsolved, name = "Unsolved Nodes"))
 
-  # if( is.null(visibleforecasts) )
-  #   visibleforecasts <- unique(forecastdf$Method)
-
-  # if( length(visibleforecasts) > 5 ) {
-  #   warning("Reducing %d visible forecasts to first five" %>% sprintf(length(visibleforecasts)))
-  #   visibleforecasts <- visibleforecasts[1:5]
-  # }
-
-  # nmethods <- length(visibleforecasts)
-
-  # g <- g + geom_line(data=subset(forecastdf, Method %in% visibleforecasts), linetype="dotdash", aes(Leaves, Forecast, col=Method %>% as.factor()))
   g <- g + scale_color_manual("", values = c(#RColorBrewer::brewer.pal(nmethods, "RdYlGn"),
-                                             "Blue", "Red", "Purple"))
+    "Blue", "Red", "Purple"))
   g
 }
 
@@ -314,150 +378,4 @@ simultaneousplot <- function(df, errordf, title="Plot", target = "save") {
     gridExtra::arrangeGrob(g1,g2,g3,g4,g5,g6, nrow=2, padding = 1000)
   else
     gridExtra::grid.arrange(g1,g2,g3,g4,g5,g6, nrow=2)
-}
-
-
-summarizeForecastdf <- function(df, forecastdf=makeForecastDf(df)) {
-  forecastdf %>% dplyr::filter(Predicted) %>% group_by(Method) %>% summarise(
-    rmsd=((Forecast - CumProgress) ** 2) %>% mean() %>% sqrt(),
-    maeProg=mean(abs(Forecast - CumProgress)),
-    maeFreq=mean(abs(ForecastFreq - LeafFreq))
-  )
-}
-
-getPredictionError <- function(prediction, actual) {
-  log2(prediction / actual)
-}
-
-getPredictionsFromForecast <- function(forecastdf) {
-  n <- nrow(forecastdf)
-  # print(forecastdf)
-  # make a prediction from the progress forecast
-  if( max(forecastdf$Forecast) >= 1.0 )
-  {
-    leafidx <- Position(function(x) x == 1, forecastdf$Forecast)
-    EstimProg <- 2 * forecastdf$Leaves[leafidx] - 1
-  }
-  else
-  {
-    if( n > 1 ) {
-      prog1 <- forecastdf$Forecast[n - 1]
-      leaves1 <- forecastdf$Leaves[n - 1]
-    }
-    else{
-      prog1 <- 0
-      leaves1 <- 0
-    }
-    slope <- (forecastdf$Forecast[n] - prog1) / (forecastdf$Leaves[n] - leaves1)
-    # print(slope)
-    estimleaves <-  forecastdf$Leaves[n] + (1.0 - forecastdf$Forecast[n]) / slope
-    EstimProg <- 2 * estimleaves - 1
-  }
-
-  # make a prediction from the leaf frequency (not always possible)
-  if( max(forecastdf$ForecastFreq) >= 0.5 )
-  {
-    leafidx <- Position(function(x) x >= 0.5, forecastdf$ForecastFreq)
-    EstimFreq <- 2 * forecastdf$Leaves[leafidx] - 1
-  }
-  else
-  {
-    if( n > 1 ) {
-      freq1 <- forecastdf$ForecastFreq[n - 1]
-      leaves1 <- forecastdf$Leaves[n - 1]
-    }
-    else{
-      freq1 <- 0
-      leaves1 <- 0
-    }
-
-    slope <- (forecastdf$ForecastFreq[n] - freq1) / (forecastdf$Leaves[n] - leaves1)
-    if( slope > 0)
-    {
-      estimleaves <- forecastdf$Leaves[n] + (0.5 - forecastdf$ForecastFreq[n]) / slope
-      EstimFreq <- 2 * estimleaves - 1
-    }
-    else
-    {
-      EstimFreq <- 2 * forecastdf$VisitedAtSplit[1]
-    }
-  }
-  # make a prediction from the ressource forecast
-  resourcelinfunc <- forecastdf$ForecastUns
-  if( min(resourcelinfunc) <= 0 ) {
-    leafidx <- Position(function(x) x <= 0.0, resourcelinfunc)
-    EstimUns <- 2 * forecastdf$Leaves[leafidx] - 1
-  }
-  else
-  {
-    if( n > 1 ) {
-      resourcelinfunc1 <- resourcelinfunc[n - 1]
-      leaves1 <- forecastdf$Leaves[n - 1]
-    }
-    else{
-      resourcelinfunc1 <- 0
-      leaves1 <- 0
-    }
-    slope <- (resourcelinfunc[n] - resourcelinfunc1) / (forecastdf$Leaves[n] - leaves1)
-    # print(slope)
-    if( slope < 0 )
-    {
-      estimleaves <- (0.0 - resourcelinfunc[n]) / slope + forecastdf$Leaves[n]
-      EstimUns <- 2 * estimleaves - 1
-    }
-    else
-      EstimUns <- 2 * forecastdf$VisitedAtSplit[1]
-  }
-
-
-
-  actual <- forecastdf$Visited[n]
-  return(data.frame(EstimProg=EstimProg,
-                    EstimFreq=EstimFreq,
-                    EstimUns=EstimUns,
-                    ErrorProg=getPredictionError(EstimProg, actual),
-                    ErrorFreq=getPredictionError(EstimFreq, actual),
-                    ErrorUns=getPredictionError(EstimUns, actual)
-                    )
-         )
-}
-
-getProblemSpecificRellevels <- function(df, rellevels) {
-  roundedprogress <- (df$CumProgress * 100) %>% as.integer(.) / 100
-  indices <- lapply(rellevels, function(x) getProgressSplitPosition(df, x)) %>% unlist()
-  indices <- indices[!is.na(indices)]
-  indices <- indices[indices < nrow(df)]
-  result <- roundedprogress[unique(indices)]
-  # discard rellevels that are too big
-  result[result <= max(rellevels)]
-}
-
-
-
-summarize_one_forecast <- function(df, rellevel, method="ets", windowsize=defaultwindowsize) {
-  trainEnd <- getProgressSplitPosition(df, rellevel)
-  d1 <- data.frame(Visited=df$Visited,
-             Leaves=df$Leaves,
-             LeafFreq=df$LeafFreq,
-             CumProgress=df$CumProgress,
-             VisitedAtSplit=rep(df$Visited[trainEnd], nrow(df)),
-             Method=method,
-             Forecast=makeProgressSplitForecast(df, rellevel, method = method, windowsize = windowsize),
-             ForecastUns=makeProgressSplitForecast(df, rellevel, method = method, target = "UnsolvedNodes", windowsize = windowsize),
-             ForecastFreq=makeProgressSplitForecast(df, rellevel, method = method, target = "LeafFreq", windowsize = windowsize)
-  )
-
-  d1 <- d1 %>% mutate(Predicted=Visited > VisitedAtSplit)
-
-  testdatarange <- (trainEnd + 1):nrow(df)
-  testdf <- df[testdatarange,]
-  testd1 <- d1[testdatarange,]
-  # print(testdatarange)
-  cbind(
-    summarizeForecastdf(testdf, testd1),
-    getPredictionsFromForecast(testd1),
-    data.frame(Actual=df$Visited[nrow(df)],
-               Current=df$Visited[trainEnd],
-               Leaves=df$Leaves[trainEnd])
-  )
 }

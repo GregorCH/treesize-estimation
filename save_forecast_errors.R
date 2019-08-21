@@ -38,7 +38,7 @@ for(d in uniformdatafiles) {
       methodname <- ifelse(method == "w-linear",
                            paste(method,w, sep = " "),
                            method)
-      lapply(problemspecificrellevels, function(x) summarize_one_forecast(df, x, method, windowsize = w)) %>%
+      lapply(problemspecificrellevels, function(x) summarize_one_forecast_linear(df, x, method, windowsize = w)) %>%
         dplyr::bind_rows() %>%
         mutate(Level=problemspecificrellevels,
                Method = methodname) %>%
