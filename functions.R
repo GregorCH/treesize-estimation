@@ -206,10 +206,10 @@ estimateLinear <- function(training_data, method, target, windowsize, alphabeta)
   )
   level <- f[nrow(training_data)]
   trend <- f[length(f)] - f[length(f) - 1]
-  print(sprintf("Level %f, trend %f", level, trend))
+  # print(sprintf("Level %f, trend %f", level, trend))
   trainingResolution <- training_data$Reso[nrow(training_data)]
   estimation.no.resolution <- getLinearPrediction(level, trend, targetvalues[[target]])
-  print(estimation.no.resolution)
+  # print(estimation.no.resolution)
 
   # na's or inf's or trends that show into the wrong direction are treated separately. In this case, we
   # simply estimate that at least twice the number of nodes is necessary to complete the search.

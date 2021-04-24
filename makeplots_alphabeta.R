@@ -10,7 +10,7 @@ errors_alphabeta <- read.csv("./errors_alphabeta.csv")
 errors_alphabeta$beta.as.factor <- factor(errors_alphabeta$beta)
 for( d in c("Prog", "Freq", "Uns", "Ssg") )
 {
-  colname <- paste("medErr", d, sep = "")
+  colname <- paste("meanAbsErr", d, sep = "")
   print(errors_alphabeta[[colname]])
   ggplot(errors_alphabeta, aes_string(x="alpha", y=colname, col="beta.as.factor")) + geom_line() + ylab("Mean Abs. Error log(predicted/actual)") +
     xlab("alpha") + scale_color_discrete("beta")
