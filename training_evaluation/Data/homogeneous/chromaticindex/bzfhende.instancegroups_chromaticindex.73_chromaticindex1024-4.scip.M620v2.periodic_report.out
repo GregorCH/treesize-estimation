@@ -1,0 +1,770 @@
+Linux optc-04-16 4.15.0-88-generic #88-Ubuntu SMP Tue Feb 11 20:11:34 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+
+top - 11:21:16 up 2 days, 21:56,  0 users,  load average: 0,09, 0,57, 0,83
+Tasks: 465 gesamt,   1 laufend, 235 schlafend,   0 gestoppt,   0 Zombie
+%CPU(s): 17,2 be,  3,8 sy,  0,0 ni, 78,9 un,  0,0 wa,  0,0 hi,  0,0 si,  0,0 st
+KiB Spch : 65916192 gesamt, 62658816 frei,   717092 belegt,  2540284 Puff/Cache
+KiB Swap:  8388604 gesamt,  8388604 frei,        0 belegt. 64622544 verfü Spch 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     ZEIT+ BEFEHL
+47722 bzfhende  20   0   52808   4392   3448 R  17,6  0,0   0:00.04 top
+    1 root      20   0  233680   9064   6524 S   0,0  0,0   0:18.13 systemd
+    2 root      20   0       0      0      0 S   0,0  0,0   0:00.29 kthreadd
+    4 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 kworker/0:+
+    5 root      20   0       0      0      0 I   0,0  0,0   0:01.28 kworker/u9+
+    7 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 mm_percpu_+
+    8 root      20   0       0      0      0 S   0,0  0,0   0:00.23 ksoftirqd/0
+    9 root      20   0       0      0      0 I   0,0  0,0   0:40.47 rcu_sched
+
+hard time limit: 00-04:10:00
+hard mem limit: 38600
+
+SLURM jobID: 6405242
+
+@01 /nfs/OPTI/bzfhende/instances//./Pierre_Le_Bodic/instances/chromaticindex1024-4.mps.gz ===========
+-----------------------------
+So 8. Mär 11:21:16 CET 2020
+-----------------------------
+@03 1583662876
+@05 7200
+SCIP version 7.0.0 [precision: 8 byte] [memory: block] [mode: optimized] [LP solver: CPLEX 12.10.0.0] [GitHash: 297532de76]
+Copyright (C) 2002-2020 Konrad-Zuse-Zentrum fuer Informationstechnik Berlin (ZIB)
+
+External codes: 
+  Readline 7.0         GNU library for command line editing (gnu.org/s/readline)
+  CPLEX 12.10.0.0      Linear Programming Solver developed by IBM (www.cplex.com)
+  CppAD 20180000.0     Algorithmic Differentiation of C++ algorithms developed by B. Bell (www.coin-or.org/CppAD)
+  ZLIB 1.2.11          General purpose compression library by J. Gailly and M. Adler (zlib.net)
+  GMP 6.1.2            GNU Multiple Precision Arithmetic Library developed by T. Granlund (gmplib.org)
+  bliss 0.73p          Computing Graph Automorphism Groups by T. Junttila and P. Kaski (http://www.tcs.hut.fi/Software/bliss/)
+
+user parameter file <scip.set> not found - using default parameters
+
+SCIP> 
+SCIP> set load /nfs/OPTI/bzfhende/scip-opti/check/../settings/periodic_report.sett
+loaded parameter file </nfs/OPTI/bzfhende/scip-opti/check/../settings/periodic_report.set>
+SCIP> set limits time 7200
+limits/time = 7200
+SCIP> set limits nodes 2100000000
+limits/nodes = 2100000000
+SCIP> set limits memory 35000
+limits/memory = 35000
+SCIP> set lp advanced threads 1
+lp/threads = 1
+SCIP> set timing clocktype 1
+timing/clocktype = 1
+SCIP> set display freq 10000
+display/freq = 10000
+SCIP> set memory savefac 1.0
+memory/savefac = 1
+SCIP> set save /nfs/OPTI/bzfhende/scip-opti/check/treesize.prediction.chromaticinndex/bzfhende.instancegroups_chromaticindex.73_chromaticindex1024-4.scip.M620v2.pperiodic_report.set
+saved parameter file </nfs/OPTI/bzfhende/scip-opti/check/treesize.prediction.chromaticindex/bzfhende.instancegroups_chromaticindex.73_chromaticindex1024-4.scip.M620v2.periodic_report.set>
+SCIP> read /nfs/OPTI/bzfhende/instances//./Pierre_Le_Bodic/instances/chromaticinddex1024-4.mps.gz
+
+read problem </nfs/OPTI/bzfhende/instances//./Pierre_Le_Bodic/instances/chromaticindex1024-4.mps.gz>
+============
+
+original problem has 73728 variables (73728 bin, 0 int, 0 impl, 0 cont) and 67583 constraints
+SCIP> display parameters
+
+number of parameters = 2603
+non-default parameter settings:
+display/freq = 10000
+limits/time = 7200
+limits/nodes = 2100000000
+limits/memory = 35000
+lp/threads = 1
+memory/savefac = 1
+timing/clocktype = 1
+estimation/restarts/restartpolicy = n
+estimation/restarts/restartlimit = 0
+estimation/reportfreq = 100
+estimation/treeprofile/enabled = TRUE
+
+SCIP> optimize
+
+presolving:
+(round 1, exhaustive) 0 del vars, 0 del conss, 0 add conss, 0 chg bounds, 0 chg sides, 0 chg coeffs, 67583 upgd conss, 0 impls, 67583 clqs
+   (2.2s) probing: 51/73728 (0.1%) - 0 fixings, 0 aggregations, 0 implications, 0 bound changes
+   (2.2s) probing aborted: 50/50 successive totally useless probings
+   (2.3s) symmetry computation started: requiring (bin +, int +, cont +), (fixed: bin -, int -, cont -)
+   (4.6s) symmetry computation finished: 4 generators found (max: 868, log10 of symmetry group size: 1.7)
+presolving (2 rounds: 2 fast, 2 medium, 2 exhaustive):
+ 0 deleted vars, 0 deleted constraints, 0 added constraints, 0 tightened bounds, 0 added holes, 0 changed sides, 0 changed coefficients
+ 0 implications, 67583 cliques
+presolved problem has 73728 variables (73728 bin, 0 int, 0 impl, 0 cont) and 67583 constraints
+  67583 constraints of type <setppc>
+transformed objective value is always integral (scale: 1)
+Presolving Time: 4.51
+
+ time | node  | left  |LP iter|LP it/n|mem/heur|mdpt |vars |cons |rows |cuts |sepa|confs|strbr|  dualbound   | primalbound  |  gap   | compl. 
+ 20.3s|     1 |     0 |     1 |     - |   846M |   0 |  73k|  67k|  67k|   0 |  0 |  50 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  268s|     1 |     0 | 20158 |     - |   918M |   0 |  73k|  67k|  67k|   1 |  1 |  51 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  351s|     1 |     0 | 20380 |     - |   933M |   0 |  73k|  67k|  67k|   3 |  2 |  52 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  430s|     1 |     0 | 20726 |     - |   947M |   0 |  73k|  67k|  67k|   4 |  3 |  53 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  508s|     1 |     0 | 21076 |     - |   965M |   0 |  73k|  67k|  67k|   5 |  4 |  54 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  588s|     1 |     0 | 21557 |     - |   977M |   0 |  73k|  67k|  67k|   8 |  5 |  55 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  666s|     1 |     0 | 21958 |     - |   996M |   0 |  73k|  67k|  67k|   9 |  6 |  56 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  748s|     1 |     0 | 22504 |     - |  1005M |   0 |  73k|  67k|  67k|  11 |  7 |  57 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  828s|     1 |     0 | 23105 |     - |  1020M |   0 |  73k|  67k|  67k|  13 |  8 |  58 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  912s|     1 |     0 | 23669 |     - |  1031M |   0 |  73k|  67k|  67k|  14 |  9 |  59 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+  994s|     1 |     0 | 24459 |     - |  1045M |   0 |  73k|  67k|  67k|  21 | 10 |  60 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+ 1079s|     1 |     0 | 25336 |     - |  1056M |   0 |  73k|  67k|  67k|  22 | 11 |  61 |   0 | 3.000000e+00 |      --      |    Inf | unknown
+d1116s|     1 |     0 | 47407 |     - |conflict|   0 |  73k|  67k|  67k|   0 | 11 |  67 |   0 | 3.000000e+00 | 4.000000e+00 |  33.33%| unknown
+ 1116s|     1 |     0 | 47407 |     - |  1059M |   0 |  73k|  67k|  67k|  22 | 11 |  67 |   0 | 3.000000e+00 | 4.000000e+00 |  33.33%| unknown
+ 1198s|     1 |     0 | 48217 |     - |  1069M |   0 |  73k|  67k|  67k|  24 | 12 |  68 |   0 | 3.000000e+00 | 4.000000e+00 |  33.33%| unknown
+ time | node  | left  |LP iter|LP it/n|mem/heur|mdpt |vars |cons |rows |cuts |sepa|confs|strbr|  dualbound   | primalbound  |  gap   | compl. 
+ 1202s|     1 |     0 | 48712 |     - |  1070M |   0 |  73k|  67k|  67k|  25 | 13 |  69 |   0 | 3.000000e+00 | 4.000000e+00 |  33.33%| unknown
+ 1284s|     1 |     2 | 48712 |     - |  1071M |   0 |  73k|  67k|  67k|  25 | 13 |  70 |  19 | 3.000000e+00 | 4.000000e+00 |  33.33%| unknown
+Report 1
+Time Elapsed: 1285.58
+Estim. Tree Size   :          3
+Estimation Tree    : 3 nodes (2 visited, 1 inner, 1 leaves, 1 open), weight: 0.5000 completed 0.5000
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :          3          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :          2    0.75000    0.75000          1          2
+  tree-weight      :          3    0.50000    0.50000          1          3
+  leaf-frequency   :          2    0.25000    0.75000          1          2
+  ssg              :          3    0.50000   -0.50000          1          3
+  open-nodes       :          4    1.00000    1.00000          1          4
+End of Report 1
+
+Report 2
+Time Elapsed: 1764.85
+Estim. Tree Size   :         30
+Estimation Tree    : 145 nodes (85 visited, 72 inner, 13 leaves, 60 open), weight: 0.7540 completed 0.5932
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :         33          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :         30    0.75000    0.09188          1         29
+  tree-weight      :         31    0.75403    0.08708          1         32
+  leaf-frequency   :        271    0.14706    0.00287          1        279
+  ssg              :         39    0.50000   -0.07069          1         38
+  open-nodes       :        170   60.00000    0.67461          1        169
+End of Report 2
+
+Report 3
+Time Elapsed: 1768.82
+Estim. Tree Size   :        123
+Estimation Tree    : 145 nodes (100 visited, 72 inner, 28 leaves, 45 open), weight: 0.7618 completed 0.5960
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :         73          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        132    0.75000    0.00654          1        127
+  tree-weight      :        124    0.76184    0.00693          1        120
+  leaf-frequency   :        254    0.27500    0.00226          1        254
+  ssg              :        254    0.50000   -0.00503          1        243
+  open-nodes       :        232   45.00000   -0.50933          1        235
+End of Report 3
+
+Report 4
+Time Elapsed: 1772.44
+Estim. Tree Size   :       1222
+Estimation Tree    : 149 nodes (123 visited, 74 inner, 49 leaves, 26 open), weight: 0.7703 completed 0.5991
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        126          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :       3193    0.75000    0.00016          1       3034
+  tree-weight      :       1222    0.77026    0.00041          1       1200
+  leaf-frequency   :        236    0.39431    0.00152          1        236
+  ssg              :       8144    0.50000   -0.00012          1       7732
+  open-nodes       :        188   26.00000   -0.57401          1        188
+End of Report 4
+
+Report 5
+Time Elapsed: 1772.44
+Estim. Tree Size   :       1160
+Estimation Tree    : 149 nodes (140 visited, 74 inner, 66 leaves, 9 open), weight: 0.7803 completed 0.6028
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        168          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :      62044    0.75000    0.00001          1      58880
+  tree-weight      :       1161    0.78027    0.00043          1       1145
+  leaf-frequency   :        186    0.46786    0.00117          1        187
+  ssg              :     161063    0.50000   -0.00001          1     152838
+  open-nodes       :        161    9.00000   -0.59870          1        162
+End of Report 5
+
+Report 6
+Time Elapsed: 1782.85
+Estim. Tree Size   :        498
+Estimation Tree    : 161 nodes (152 visited, 80 inner, 72 leaves, 9 open), weight: 0.7930 completed 0.6074
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        181          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :     178364    0.75000    0.00000          1     169256
+  tree-weight      :        499    0.79297    0.00116          1        534
+  leaf-frequency   :       1431    0.47039    0.00005          1       1147
+  ssg              :     463393    0.50000   -0.00000          1     439719
+  open-nodes       :        239    9.00000   -0.18757          1        228
+End of Report 6
+
+Report 7
+Time Elapsed: 1794.95
+Estim. Tree Size   :        347
+Estimation Tree    : 165 nodes (156 visited, 82 inner, 74 leaves, 9 open), weight: 0.8047 completed 0.6117
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        183          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :     253669    0.75000    0.00000          1     240713
+  tree-weight      :        347    0.80469    0.00195          1        376
+  leaf-frequency   :        312    0.47115   -0.00000          1        365
+  ssg              :     659128    0.50000   -0.00000          1     625452
+  open-nodes       :        299    9.00000   -0.11834          1        278
+End of Report 7
+
+Report 8
+Time Elapsed: 1795.45
+Estim. Tree Size   :        302
+Estimation Tree    : 167 nodes (158 visited, 83 inner, 75 leaves, 9 open), weight: 0.8125 completed 0.6146
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        184          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :     302523    0.75000    0.00000          1     287071
+  tree-weight      :        302    0.81250    0.00245          1        321
+  leaf-frequency   :        316    0.47152   -0.00004          1        328
+  ssg              :     786111    0.50000   -0.00000          1     745947
+  open-nodes       :        342    9.00000   -0.09321          1        326
+End of Report 8
+
+Report 9
+Time Elapsed: 1795.82
+Estim. Tree Size   :        276
+Estimation Tree    : 167 nodes (159 visited, 83 inner, 76 leaves, 8 open), weight: 0.8203 completed 0.6175
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        184          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :     360791    0.75000    0.00000          1     342361
+  tree-weight      :        276    0.82031    0.00287          1        287
+  leaf-frequency   :        321    0.47484    0.00030          1        323
+  ssg              :     937563    0.50000   -0.00000          1     889659
+  open-nodes       :        246    8.00000   -0.16772          1        266
+End of Report 9
+
+Report 10
+Time Elapsed: 1796.18
+Estim. Tree Size   :        248
+Estimation Tree    : 167 nodes (161 visited, 83 inner, 78 leaves, 6 open), weight: 0.8359 completed 0.6232
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        186          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        322    0.75000    0.00000          1     102318
+  tree-weight      :        248    0.83594    0.00352          1        253
+  leaf-frequency   :        202    0.48137    0.00079          1        214
+  ssg              :        322    0.50000   -0.00000          1      55905
+  open-nodes       :        196    6.00000   -0.29564          1        203
+End of Report 10
+
+Report 11
+Time Elapsed: 1796.51
+Estim. Tree Size   :        239
+Estimation Tree    : 167 nodes (162 visited, 83 inner, 79 leaves, 5 open), weight: 0.8438 completed 0.6261
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        186          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        324    0.75000    0.00000          1      25822
+  tree-weight      :        240    0.84375    0.00377          1        243
+  leaf-frequency   :        192    0.48457    0.00089          1        197
+  ssg              :        324    0.50000   -0.00000          1      14219
+  open-nodes       :        186    5.00000   -0.34481          1        190
+End of Report 11
+
+Report 12
+Time Elapsed: 1806.06
+Estim. Tree Size   :        218
+Estimation Tree    : 169 nodes (164 visited, 84 inner, 80 leaves, 5 open), weight: 0.8594 completed 0.6318
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        185          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        328    0.75000    0.00000          1       6702
+  tree-weight      :        218    0.85938    0.00474          1        225
+  leaf-frequency   :        207    0.48476    0.00064          1        204
+  ssg              :        328    0.50000   -0.00000          1       3801
+  open-nodes       :        193    5.00000   -0.29604          1        192
+End of Report 12
+
+Report 13
+Time Elapsed: 1806.54
+Estim. Tree Size   :        215
+Estimation Tree    : 171 nodes (166 visited, 85 inner, 81 leaves, 5 open), weight: 0.8672 completed 0.6346
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        186          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        332    0.75000    0.00000          1       1924
+  tree-weight      :        216    0.86719    0.00484          1        218
+  leaf-frequency   :        239    0.48494    0.00039          1        230
+  ssg              :        332    0.50000   -0.00000          1       1199
+  open-nodes       :        201    5.00000   -0.24871          1        199
+End of Report 13
+
+Report 14
+Time Elapsed: 1806.75
+Estim. Tree Size   :        220
+Estimation Tree    : 173 nodes (168 visited, 86 inner, 82 leaves, 5 open), weight: 0.8711 completed 0.6361
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        187          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        336    0.75000    0.00000          1        733
+  tree-weight      :        220    0.87109    0.00450          1        220
+  leaf-frequency   :        298    0.48512    0.00022          1        281
+  ssg              :        336    0.50000   -0.00000          1        552
+  open-nodes       :        211    5.00000   -0.20856          1        208
+End of Report 14
+
+Report 15
+Time Elapsed: 1815.94
+Estim. Tree Size   :        210
+Estimation Tree    : 175 nodes (171 visited, 87 inner, 84 leaves, 4 open), weight: 0.8906 completed 0.6432
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        188          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        342    0.75000    0.00000          1        366
+  tree-weight      :        210    0.89062    0.00507          1        213
+  leaf-frequency   :        237    0.48830    0.00033          1        237
+  ssg              :        342    0.50000   -0.00000          1        354
+  open-nodes       :        202    4.00000   -0.22852          1        201
+End of Report 15
+
+Report 16
+Time Elapsed: 1816.41
+Estim. Tree Size   :        207
+Estimation Tree    : 177 nodes (174 visited, 88 inner, 86 leaves, 3 open), weight: 0.9062 completed 0.6490
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        189          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        348    0.75000    0.00000          1        349
+  tree-weight      :        208    0.90625    0.00511          1        208
+  leaf-frequency   :        213    0.49138    0.00041          1        226
+  ssg              :        348    0.50000   -0.00000          1        348
+  open-nodes       :        195    3.00000   -0.25106          1        198
+End of Report 16
+
+Report 17
+Time Elapsed: 1825.67
+Estim. Tree Size   :        199
+Estimation Tree    : 179 nodes (176 visited, 89 inner, 87 leaves, 3 open), weight: 0.9219 completed 0.6547
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        188          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        352    0.75000    0.00000          1        351
+  tree-weight      :        200    0.92188    0.00587          1        202
+  leaf-frequency   :        225    0.49148    0.00033          1        225
+  ssg              :        352    0.50000   -0.00000          1        351
+  open-nodes       :        201    3.00000   -0.21694          1        200
+End of Report 17
+
+Report 18
+Time Elapsed: 1826.18
+Estim. Tree Size   :        199
+Estimation Tree    : 181 nodes (179 visited, 90 inner, 89 leaves, 2 open), weight: 0.9375 completed 0.6604
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        189          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        358    0.75000    0.00000          1        357
+  tree-weight      :        199    0.93750    0.00568          1        199
+  leaf-frequency   :        205    0.49441    0.00040          1        216
+  ssg              :        358    0.50000   -0.00000          1        357
+  open-nodes       :        193    2.00000   -0.24293          1        197
+End of Report 18
+
+Report 19
+Time Elapsed: 1835.22
+Estim. Tree Size   :        193
+Estimation Tree    : 183 nodes (181 visited, 91 inner, 90 leaves, 2 open), weight: 0.9531 completed 0.6662
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        188          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        362    0.75000    0.00000          1        361
+  tree-weight      :        194    0.95312    0.00634          1        195
+  leaf-frequency   :        214    0.49448    0.00031          1        215
+  ssg              :        362    0.50000   -0.00000          1        361
+  open-nodes       :        198    2.00000   -0.21012          1        198
+End of Report 19
+
+Report 20
+Time Elapsed: 1835.64
+Estim. Tree Size   :        193
+Estimation Tree    : 185 nodes (183 visited, 92 inner, 91 leaves, 2 open), weight: 0.9609 completed 0.6690
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        188          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        366    0.75000    0.00000          1        365
+  tree-weight      :        194    0.96094    0.00619          1        194
+  leaf-frequency   :        236    0.49454    0.00020          1        231
+  ssg              :        366    0.50000   -0.00000          1        365
+  open-nodes       :        204    2.00000   -0.17663          1        202
+End of Report 20
+
+Report 21
+Time Elapsed: 1844.81
+Estim. Tree Size   :        192
+Estimation Tree    : 189 nodes (188 visited, 94 inner, 94 leaves, 1 open), weight: 0.9844 completed 0.6776
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        190          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        376    0.75000    0.00000          1        375
+  tree-weight      :        192    0.98438    0.00587          1        193
+  leaf-frequency   :        207    0.49734    0.00027          1        210
+  ssg              :        376    0.50000   -0.00000          1        375
+  open-nodes       :        198    1.00000   -0.18603          1        198
+End of Report 21
+
+Report 22
+Time Elapsed: 1845.93
+Estim. Tree Size   :        196
+Estimation Tree    : 197 nodes (195 visited, 98 inner, 97 leaves, 2 open), weight: 0.9922 completed 0.6805
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        195          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        390    0.75000    0.00000          1        389
+  tree-weight      :        197    0.99219    0.00425          1        196
+  leaf-frequency   :        390    0.49487   -0.00002          1        386
+  ssg              :        390    0.50000   -0.00000          1        389
+  open-nodes       :        268    2.00000   -0.05365          1        271
+End of Report 22
+
+Report 23
+Time Elapsed: 1846.77
+Estim. Tree Size   :        201
+Estimation Tree    : 201 nodes (201 visited, 100 inner, 101 leaves, 0 open), weight: 1.0000 completed 1.0000
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        201          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        201    1.00000    0.02250          1        250
+  tree-weight      :        201    1.00000    0.00276          1        201
+  leaf-frequency   :        201    0.50000    0.00040          1        213
+  ssg              :        201    0.00000   -0.04500          1        250
+  open-nodes       :        201    0.00000   -0.18589          1        206
+End of Report 23
+
+
+SCIP Status        : problem is solved [optimal solution found]
+Solving Time (sec) : 1846.77
+Solving Nodes      : 156
+Primal Bound       : +4.00000000000000e+00 (1 solutions)
+Dual Bound         : +4.00000000000000e+00
+Gap                : 0.00 %
+
+SCIP> display statistics
+
+SCIP Status        : problem is solved [optimal solution found]
+Total Time         :    1847.41
+  solving          :    1846.77
+  presolving       :       4.51 (included in solving)
+  reading          :       0.64
+  copying          :       0.18 (1 #copies) (minimal 0.18, maximal 0.18, average 0.18)
+Original Problem   :
+  Problem name     : chromaticindex1024-4
+  Variables        : 73728 (73728 binary, 0 integer, 0 implicit integer, 0 continuous)
+  Constraints      : 67583 initial, 67583 maximal
+  Objective        : minimize, 4 non-zeros (abs.min = 1, abs.max = 1)
+Presolved Problem  :
+  Problem name     : t_chromaticindex1024-4
+  Variables        : 73728 (73728 binary, 0 integer, 0 implicit integer, 0 continuous)
+  Constraints      : 67583 initial, 68057 maximal
+  Objective        : minimize, 4 non-zeros (abs.min = 1, abs.max = 1)
+  Nonzeros         : 270324 constraint, 258042 clique table
+Presolvers         :   ExecTime  SetupTime  Calls  FixedVars   AggrVars   ChgTypes  ChgBounds   AddHoles    DelCons    AddCons   ChgSides   ChgCoefs
+  boundshift       :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  convertinttobin  :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  domcol           :       0.09       0.00      1          0          0          0          0          0          0          0          0          0
+  dualagg          :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  dualcomp         :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  dualinfer        :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  dualsparsify     :       0.11       0.00      1          0          0          0          0          0          0          0          0          0
+  gateextraction   :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  implics          :       0.00       0.00      2          0          0          0          0          0          0          0          0          0
+  inttobinary      :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  qpkktref         :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  redvub           :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  sparsify         :       0.14       0.00      1          0          0          0          0          0          0          0          0          0
+  stuffing         :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  trivial          :       0.01       0.00      2          0          0          0          0          0          0          0          0          0
+  tworowbnd        :       0.14       0.00      1          0          0          0          0          0          0          0          0          0
+  dualfix          :       0.00       0.00      2          0          0          0          0          0          0          0          0          0
+  genvbounds       :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  probing          :       0.71       0.00      1          0          0          0          0          0          0          0          0          0
+  pseudoobj        :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  symmetry         :       2.35       0.00      1          0          0          0          0          0          0          0          0          0
+  vbounds          :       0.04       0.00      1          0          0          0          0          0          0          0          0          0
+  knapsack         :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  setppc           :       0.20       0.01      3          0          0          0          0          0          0          0          0          0
+  linear           :       0.49       0.05      2          0          0          0          0          0          0          0          0          0
+  logicor          :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  benders          :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  components       :       0.05       0.00      1          0          0          0          0          0          0          0          0          0
+  root node        :          -          -      -      18452          -          -      18452          -          -          -          -          -
+Constraints        :     Number  MaxNumber  #Separate #Propagate    #EnfoLP    #EnfoRelax  #EnfoPS    #Check   #ResProp    Cutoffs    DomReds       Cuts    Applied      Conss   Children
+  benderslp        :          0          0          0          0        100          0          0          9          0          0          0          0          0          0          0
+  integral         :          0          0          0          0        100          0          0          9          0          0          0          0          0          0        200
+  knapsack         :          0+         1          0         49          0          0          0          0          1          2          3          0          0          0          0
+  setppc           :      67583+     67584         12     243160          0          0          0          4       4609        241      37992          0          0          0          0
+  logicor          :          0+       472         12       1786          0          0          0          0        153          9        109          0          0          0          0
+  benders          :          0          0          0          0          0          0          0          2          0          0          0          0          0          0          0
+  countsols        :          0          0          0          0          0          0          0          2          0          0          0          0          0          0          0
+  components       :          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0
+Constraint Timings :  TotalTime  SetupTime   Separate  Propagate     EnfoLP     EnfoPS     EnfoRelax   Check    ResProp    SB-Prop
+  benderslp        :       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00
+  integral         :      83.60       0.00       0.00       0.00      83.58       0.00       0.00       0.02       0.00       0.00
+  knapsack         :       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00
+  setppc           :       1.37       0.01       0.09       1.26       0.00       0.00       0.00       0.00       0.00       0.01
+  logicor          :       0.01       0.00       0.00       0.01       0.00       0.00       0.00       0.00       0.00       0.00
+  benders          :       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00
+  countsols        :       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00
+  components       :       0.08       0.00       0.00       0.08       0.00       0.00       0.00       0.00       0.00       0.00
+Propagators        : #Propagate   #ResProp    Cutoffs    DomReds
+  dualfix          :          2          0          0          0
+  genvbounds       :          0          0          0          0
+  nlobbt           :          0          0          0          0
+  obbt             :          0          0          0          0
+  probing          :          0          0          0          0
+  pseudoobj        :        735          0          0          1
+  redcost          :         17          0          0          0
+  rootredcost      :          0          0          0          0
+  symmetry         :        155          0          0         69
+  vbounds          :     243163          0          0          0
+Propagator Timings :  TotalTime  SetupTime   Presolve  Propagate    ResProp    SB-Prop
+  dualfix          :       0.00       0.00       0.00       0.00       0.00       0.00
+  genvbounds       :       0.08       0.00       0.00       0.08       0.00       0.00
+  nlobbt           :       0.00       0.00       0.00       0.00       0.00       0.00
+  obbt             :       0.00       0.00       0.00       0.00       0.00       0.00
+  probing          :       0.71       0.00       0.71       0.00       0.00       0.00
+  pseudoobj        :       0.93       0.00       0.00       0.93       0.00       0.00
+  redcost          :       0.17       0.00       0.00       0.17       0.00       0.00
+  rootredcost      :       0.12       0.00       0.00       0.12       0.00       0.00
+  symmetry         :       2.83       0.00       2.35       0.48       0.00       0.00
+  vbounds          :       0.30       0.00       0.04       0.26       0.00       0.00
+Orbital fixing     :
+  vars fixed to 0  :         63
+  vars fixed to 1  :          6
+Conflict Analysis  :       Time      Calls    Success    DomReds  Conflicts   Literals    Reconvs ReconvLits   Dualrays   Nonzeros   LP Iters   (pool size: [10000,10000])
+  propagation      :       0.01        250        248          -        581        7.7         36        7.5          -          -          -
+  infeasible LP    :       0.01          1          1          -          2        4.0          0        0.0          1        7.0          0
+  bound exceed. LP :       0.01          1          1          -          1        3.0          0        0.0          1        3.0          0
+  strong branching :       0.00          0          0          -          0        0.0          0        0.0          -          -          0
+  pseudo solution  :       0.00          0          0          -          0        0.0          0        0.0          -          -          -
+  applied globally :       0.02          -          -          0        537        6.9          -          -          2          -          -
+  applied locally  :          -          -          -          0          0        0.0          -          -          0          -          -
+Separators         :   ExecTime  SetupTime      Calls    Cutoffs    DomReds       Cuts    Applied      Conss
+  cut pool         :       0.53                    90          -          -       8687          -          -    (maximal pool size: 10339)
+  aggregation      :       0.93       0.00         44          0          0          0          0          0
+  cgmip            :       0.00       0.00          0          0          0          0          0          0
+  clique           :     834.47       0.00         12          0          0          0          0          0
+  closecuts        :       0.00       0.00          0          0          0          0          0          0
+  cmir             :       0.00       0.00          0          0          0          0          0          0
+  convexproj       :       0.00       0.00          0          0          0          0          0          0
+  disjunctive      :       0.00       0.00          0          0          0          0          0          0
+  eccuts           :       0.00       0.00          0          0          0          0          0          0
+  flowcover        :       0.00       0.00          0          0          0          0          0          0
+  gauge            :       0.00       0.00          0          0          0          0          0          0
+  gomory           :       4.10       0.00         42          0          0       3600        130          0
+  impliedbounds    :       0.12       0.00         44          0          0          0          0          0
+  intobj           :       0.00       0.00          0          0          0          0          0          0
+  mcf              :       0.05       0.00          1          0          0          0          0          0
+  oddcycle         :       0.00       0.00          0          0          0          0          0          0
+  rapidlearning    :       0.03       0.00          0          0          0          0          0          0
+  strongcg         :       3.84       0.00         44          0          0       6640         33          0
+  zerohalf         :     134.82       0.00         44          0          0         99        316          0
+Pricers            :   ExecTime  SetupTime      Calls       Vars
+  problem variables:       0.00          -          0          0
+Branching Rules    :   ExecTime  SetupTime   BranchLP  BranchExt   BranchPS    Cutoffs    DomReds       Cuts      Conss   Children
+  allfullstrong    :       0.00       0.00          0          0          0          0          0          0          0          0
+  cloud            :       0.00       0.00          0          0          0          0          0          0          0          0
+  distribution     :       0.00       0.00          0          0          0          0          0          0          0          0
+  fullstrong       :       0.00       0.00          0          0          0          0          0          0          0          0
+  inference        :       0.00       0.00          0          0          0          0          0          0          0          0
+  leastinf         :       0.00       0.00          0          0          0          0          0          0          0          0
+  lookahead        :       0.00       0.00          0          0          0          0          0          0          0          0
+  mostinf          :       0.00       0.00          0          0          0          0          0          0          0          0
+  multaggr         :       0.00       0.00          0          0          0          0          0          0          0          0
+  nodereopt        :       0.00       0.00          0          0          0          0          0          0          0          0
+  pscost           :       0.00       0.00          0          0          0          0          0          0          0          0
+  random           :       0.00       0.00          0          0          0          0          0          0          0          0
+  relpscost        :      83.58       0.00        100          0          0          0          0          0          0        200
+  vanillafullstrong:       0.00       0.00          0          0          0          0          0          0          0          0
+Primal Heuristics  :   ExecTime  SetupTime      Calls      Found       Best
+  LP solutions     :       0.00          -          -          0          0
+  relax solutions  :       0.00          -          -          0          0
+  pseudo solutions :       0.00          -          -          0          0
+  strong branching :       0.00          -          -          0          0
+  actconsdiving    :       0.00       0.00          0          0          0
+  adaptivediving   :       3.97       0.00          9          0          0
+  alns             :       0.66       0.00          1          0          0
+  bound            :       0.00       0.00          0          0          0
+  clique           :       0.31       0.00          1          0          0
+  coefdiving       :       0.00       0.00          0          0          0
+  completesol      :       0.00       0.00          0          0          0
+  conflictdiving   :      39.13       0.00         15          1          1
+  crossover        :       0.00       0.00          0          0          0
+  dins             :       0.00       0.00          0          0          0
+  distributiondivin:       8.40       0.00          1          0          0
+  dualval          :       0.00       0.00          0          0          0
+  farkasdiving     :       0.00       0.00          0          0          0
+  feaspump         :     164.23       0.00          1          0          0
+  fixandinfer      :       0.00       0.00          0          0          0
+  fracdiving       :       0.37       0.00          2          0          0
+  gins             :       0.03       0.00          0          0          0
+  guideddiving     :       0.62       0.00          4          0          0
+  indicator        :       0.00       0.00          0          0          0
+  intdiving        :       0.00       0.00          0          0          0
+  intshifting      :       0.00       0.00          0          0          0
+  linesearchdiving :       1.09       0.00          3          0          0
+  localbranching   :       0.00       0.00          0          0          0
+  locks            :       0.33       0.00          1          0          0
+  lpface           :       0.00       0.00          0          0          0
+  mpec             :       0.00       0.00          0          0          0
+  multistart       :       0.00       0.00          0          0          0
+  mutation         :       0.00       0.00          0          0          0
+  nlpdiving        :       0.00       0.00          0          0          0
+  objpscostdiving  :     312.26       0.00          1          0          0
+  octane           :       0.00       0.00          0          0          0
+  ofins            :       0.00       0.00          0          0          0
+  oneopt           :       0.03       0.00          1          0          0
+  padm             :       0.00       0.00          0          0          0
+  proximity        :       0.00       0.00          0          0          0
+  pscostdiving     :       2.75       0.00          7          0          0
+  randrounding     :       2.11       0.00         15          0          0
+  rens             :       0.01       0.00          0          0          0
+  reoptsols        :       0.00       0.00          0          0          0
+  repair           :       0.00       0.00          0          0          0
+  rins             :       0.00       0.00          0          0          0
+  rootsoldiving    :       2.00       0.00          1          0          0
+  rounding         :       1.23       0.00        131          0          0
+  shiftandpropagate:       0.39       0.00          1          0          0
+  shifting         :      29.86       0.00         66          0          0
+  simplerounding   :       0.00       0.00        148          0          0
+  subnlp           :       0.00       0.00          0          0          0
+  trivial          :       0.09       0.00          2          0          0
+  trivialnegation  :       0.00       0.00          0          0          0
+  trustregion      :       0.00       0.00          0          0          0
+  trysol           :       0.00       0.00          0          0          0
+  twoopt           :       0.00       0.00          0          0          0
+  undercover       :       0.00       0.00          0          0          0
+  vbounds          :       6.90       0.00          1          0          0
+  veclendiving     :       0.03       0.00          1          0          0
+  zeroobj          :       0.00       0.00          0          0          0
+  zirounding       :       0.56       0.00        100          0          0
+  other solutions  :          -          -          -          0          -
+Diving (single)    :      Calls      Nodes   LP Iters Backtracks  Conflicts   MinDepth   MaxDepth   AvgDepth  RoundSols  NLeafSols  MinSolDpt  MaxSolDpt  AvgSolDpt
+  actconsdiving    :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  coefdiving       :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  conflictdiving   :         15       4738      22071         64        261         17       3256      321.9          0          1       3256       3256     3256.0
+  distributiondivin:          1        688       6684         12         46        681        681      681.0          0          -          -          -          -
+  farkasdiving     :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  fracdiving       :          2        122          0          6         20         19        112       65.5          0          -          -          -          -
+  guideddiving     :          4        196          0          9         31         19        111       55.2          0          -          -          -          -
+  linesearchdiving :          3        376          0          6         23         27        337      131.0          0          -          -          -          -
+  pscostdiving     :          7      11497          3          9         55        664       6058     1652.1          0          -          -          -          -
+  veclendiving     :          1          7          0          1          9         14         14       14.0          0          -          -          -          -
+Diving (adaptive)  :      Calls      Nodes   LP Iters Backtracks  Conflicts   MinDepth   MaxDepth   AvgDepth  RoundSols  NLeafSols  MinSolDpt  MaxSolDpt  AvgSolDpt
+  actconsdiving    :          3        120          0          4         20         45         52       48.0          0          -          -          -          -
+  coefdiving       :          3        832          0          5         14        105        376      284.0          0          -          -          -          -
+  conflictdiving   :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  distributiondivin:          0          -          -          -          -          -          -          -          -          -          -          -          -
+  farkasdiving     :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  fracdiving       :          1         36          0          2         12         44         44       44.0          0          -          -          -          -
+  guideddiving     :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  linesearchdiving :          1        307          0          2          5        310        310      310.0          0          -          -          -          -
+  pscostdiving     :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  veclendiving     :          1          9          0          2         11         16         16       16.0          0          -          -          -          -
+Neighborhoods      :      Calls  SetupTime  SolveTime SolveNodes       Sols       Best       Exp3  EpsGreedy        UCB TgtFixRate  Opt  Inf Node Stal  Sol  Usr Othr Actv
+  rens             :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  rins             :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  mutation         :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  localbranching   :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  crossover        :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  proximity        :          1       0.31       0.28          0          0          0    0.00000   -1.00000    1.00000      0.700    0    1    0    0    0    0    0    1
+  zeroobjective    :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  dins             :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  trustregion      :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    0
+LP                 :       Time      Calls Iterations  Iter/call   Iter/sec  Time-0-It Calls-0-It    ItLimit
+  primal LP        :      10.05         12          0       0.00       0.00      10.05         12
+  dual LP          :     187.11        183      93868     512.94     501.67       0.00          0
+  lex dual LP      :       0.00          0          0       0.00          -
+  barrier LP       :       0.00          0          0       0.00          -       0.00          0
+  resolve instable :       0.00          0          0       0.00          -
+  diving/probing LP:     498.82        861      65185      75.71     130.68
+  strong branching :      81.10         19      18244     960.21     224.96          -          -         31
+    (at root node) :          -         19      18244     960.21          -
+  conflict analysis:       0.00          0          0       0.00          -
+B&B Tree           :
+  number of runs   :          1
+  nodes            :        156 (100 internal, 56 leaves)
+  feasible leaves  :          0
+  infeas. leaves   :         21
+  objective leaves :         35
+  nodes (total)    :        156 (100 internal, 56 leaves)
+  nodes left       :          0
+  max depth        :         13
+  max depth (total):         13
+  backtracks       :         82 (52.6%)
+  early backtracks :          0 (0.0%)
+  nodes exc. ref.  :          0 (0.0%)
+  delayed cutoffs  :         45
+  repropagations   :        103 (18663 domain reductions, 11 cutoffs)
+  avg switch length:       4.29
+  switching time   :       8.71
+Estim. Tree Size   :        201
+Estimation Tree    : 201 nodes (201 visited, 100 inner, 101 leaves, 0 open), weight: 1.0000 completed 1.0000
+Estimations        :      estim      value      trend resolution     smooth
+  wbe              :        201          -          -          -          -
+  tree-profile     :         -1          -          -          -          -
+  gap              :        201    1.00000    0.02250          1        250
+  tree-weight      :        201    1.00000    0.00276          1        201
+  leaf-frequency   :        201    0.50000    0.00040          1        213
+  ssg              :        201    0.00000   -0.04500          1        250
+  open-nodes       :        201    0.00000   -0.18589          1        206
+Root Node          :
+  First LP value   : +3.00000000000000e+00
+  First LP Iters   :          1 (0.15 Iter/sec)
+  First LP Time    :       6.83
+  Final Dual Bound : +3.00000000000000e+00
+  Final Root Iters :      26641
+  Root LP Estimate : +3.00284382755599e+00
+Solution           :
+  Solutions found  :          1 (1 improvements)
+  First Solution   : +4.00000000000000e+00   (in run 1, after 1 nodes, 1115.60 seconds, depth 3256, found by <conflictdiving>)
+  Gap First Sol.   :      33.33 %
+  Gap Last Sol.    :      33.33 %
+  Primal Bound     : +4.00000000000000e+00   (in run 1, after 1 nodes, 1115.60 seconds, depth 3256, found by <conflictdiving>)
+  Dual Bound       : +4.00000000000000e+00
+  Gap              :       0.00 %
+Integrals          :      Total       Avg%
+  primal-dual      :  129840.00      70.31
+  primal-ref       :          -          - (not evaluated)
+  dual-ref         :          -          - (not evaluated)
+
+SCIP> checksol
+
+check best solution
+solution is feasible in original problem
+Violation          :    absolute    relative
+  bounds           : 0.00000e+00 0.00000e+00
+  integrality      : 0.00000e+00           -
+  LP rows          : 0.00000e+00 0.00000e+00
+  constraints      : 0.00000e+00 0.00000e+00
+
+SCIP> write sol /local/tmp/bzfhende-tmpdir/bzfhende.instancegroups_chromaticindexx.73_chromaticindex1024-4.scip.M620v2.periodic_report.sol
+
+written solution information to file </local/tmp/bzfhende-tmpdir/bzfhende.instancegroups_chromaticindex.73_chromaticindex1024-4.scip.M620v2.periodic_report.sol>
+
+SCIP> quit
+
+Read MPS: 1
+MIP has 73728 vars and 67583 constraints
+Read SOL: 1
+Objective value computed by solver: 4
+
+Integrality tolerance: 1/10000
+Linear tolerance: 1/10000
+Objective tolerance: 1/10000
+
+Check SOL: Integrality 1 Constraints 1 Objective 1
+Maximum violations: Integrality 0 Constraints 0 Objective 0
+@04 1583664730
+-----------------------------
+So 8. Mär 11:52:10 CET 2020
+-----------------------------
+
+=ready=

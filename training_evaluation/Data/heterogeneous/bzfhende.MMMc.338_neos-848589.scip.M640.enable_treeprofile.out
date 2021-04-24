@@ -1,0 +1,958 @@
+Linux optc-01-13 4.15.0-58-generic #64-Ubuntu SMP Tue Aug 6 11:12:41 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
+top - 01:44:39 up 1 day, 15:45,  0 users,  load average: 0,00, 0,20, 0,54
+Tasks: 289 gesamt,   1 laufend, 149 schlafend,   0 gestoppt,   0 Zombie
+%CPU(s):  7,0 be,  0,2 sy,  0,0 ni, 92,7 un,  0,0 wa,  0,0 hi,  0,0 si,  0,0 st
+KiB Spch : 97514992 gesamt, 94400128 frei,   652708 belegt,  2462156 Puff/Cache
+KiB Swap:  8388604 gesamt,  8388604 frei,        0 belegt. 96118480 verfü Spch 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     ZEIT+ BEFEHL
+25320 bzfhende  20   0   52664   4180   3428 R   6,2  0,0   0:00.01 top
+    1 root      20   0  233852   9408   6700 S   0,0  0,0   0:12.62 systemd
+    2 root      20   0       0      0      0 S   0,0  0,0   0:00.13 kthreadd
+    3 root      20   0       0      0      0 I   0,0  0,0   0:02.01 kworker/0:0
+    4 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 I   0,0  0,0   0:00.00 kworker/u3+
+    7 root       0 -20       0      0      0 I   0,0  0,0   0:00.00 mm_percpu_+
+    8 root      20   0       0      0      0 S   0,0  0,0   0:00.01 ksoftirqd/0
+
+hard time limit: 04:10:00
+hard mem limit: 55100
+
+SLURM jobID: 2182802
+
+@01 /nfs/optimi/kombadon/IP/coral/neos-848589.mps.gz ===========
+-----------------------------
+Fr 23. Aug 01:44:39 CEST 2019
+-----------------------------
+@03 1566517479
+@05 7200
+SCIP version 6.0.0 [precision: 8 byte] [memory: block] [mode: optimized] [LP solver: CPLEX 12.8.0.0] [GitHash: 41ab6e0014]
+Copyright (C) 2002-2018 Konrad-Zuse-Zentrum fuer Informationstechnik Berlin (ZIB)
+
+External codes: 
+  Readline 7.0         GNU library for command line editing (gnu.org/s/readline)
+  CPLEX 12.8.0.0       Linear Programming Solver developed by IBM (www.cplex.com)
+  CppAD 20180000.0     Algorithmic Differentiation of C++ algorithms developed by B. Bell (www.coin-or.org/CppAD)
+  ZLIB 1.2.11          General purpose compression library by J. Gailly and M. Adler (zlib.net)
+  GMP 6.1.2            GNU Multiple Precision Arithmetic Library developed by T. Granlund (gmplib.org)
+  bliss 0.73p          Computing Graph Automorphism Groups by T. Junttila and P. Kaski (http://www.tcs.hut.fi/Software/bliss/)
+
+user parameter file <scip.set> not found - using default parameters
+
+SCIP> 
+SCIP> set load /home/optimi/bzfhende/opti/scip-opti/check/../settings/enable_treeeprofile.set
+loaded parameter file </home/optimi/bzfhende/opti/scip-opti/check/../settings/enable_treeprofile.set>
+SCIP> set misc referencevalue 2351.4031
+misc/referencevalue = 2351.4031
+SCIP> set limits time 7200
+limits/time = 7200
+SCIP> set limits nodes 2100000000
+limits/nodes = 2100000000
+SCIP> set limits memory 50000
+limits/memory = 50000
+SCIP> set lp advanced threads 1
+lp/threads = 1
+SCIP> set timing clocktype 1
+timing/clocktype = 1
+SCIP> set display freq 10000
+display/freq = 10000
+SCIP> set memory savefac 1.0
+memory/savefac = 1
+SCIP> set save /home/optimi/bzfhende/opti/scip-opti/check/treesize.estimation.jouurnal.3/bzfhende.MMMc.338_neos-848589.scip.M640.enable_treeprofile.set
+saved parameter file </home/optimi/bzfhende/opti/scip-opti/check/treesize.estimation.journal.3/bzfhende.MMMc.338_neos-848589.scip.M640.enable_treeprofile.set>
+SCIP> read /nfs/optimi/kombadon/IP/coral/neos-848589.mps.gz
+
+read problem </nfs/optimi/kombadon/IP/coral/neos-848589.mps.gz>
+============
+
+original problem has 550539 variables (747 bin, 0 int, 0 impl, 549792 cont) and 1484 constraints
+SCIP> display parameters
+
+number of parameters = 2448
+non-default parameter settings:
+display/freq = 10000
+limits/time = 7200
+limits/nodes = 2100000000
+limits/memory = 50000
+lp/threads = 1
+memory/savefac = 1
+misc/referencevalue = 2351.4031
+presolving/maxrestarts = 0
+estimates/profile/enabled = TRUE
+estimates/profile/maxdepthfactor = 10
+estimates/profile/freq = 0
+
+SCIP> optimize
+
+Activating tree profile data collection
+presolving:
+(round 1, fast)       0 del vars, 0 del conss, 0 add conss, 1099584 chg bounds, 0 chg sides, 0 chg coeffs, 0 upgd conss, 0 impls, 0 clqs
+   (45.0s) probing cycle finished: starting next cycle
+presolving (2 rounds: 2 fast, 1 medium, 1 exhaustive):
+ 0 deleted vars, 0 deleted constraints, 0 added constraints, 1099584 tightened bounds, 0 added holes, 0 changed sides, 747 changed coefficients
+ 549792 implications, 0 cliques
+presolved problem has 550539 variables (747 bin, 0 int, 0 impl, 549792 cont) and 1484 constraints
+   1484 constraints of type <linear>
+Presolving Time: 44.54
+
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |vars |cons |cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+k47.6s|     1 |     0 |     0 |     - |2100M|   0 |   - | 550k|1484 | 550k|1484 |   0 |   0 |   0 | 0.000000e+00 | 1.019748e+07 |    Inf 
+ 48.8s|     1 |     0 |   658 |     - |2107M|   0 | 631 | 550k|1484 | 550k|1484 |   0 |   0 |   0 | 0.000000e+00 | 1.019748e+07 |    Inf 
+ 50.9s|     1 |     0 |  1833 |     - |2176M|   0 | 450 | 550k|1484 | 550k|2113 | 629 |   0 |   0 | 4.490704e+02 | 1.019748e+07 |  Large 
+ 53.0s|     1 |     0 |  2475 |     - |2192M|   0 | 442 | 550k|1484 | 550k|2561 |1077 |   0 |   0 | 6.785326e+02 | 1.019748e+07 |  Large 
+ 55.2s|     1 |     0 |  3134 |     - |2197M|   0 | 434 | 550k|1484 | 550k|2994 |1510 |   0 |   0 | 8.576562e+02 | 1.019748e+07 |  Large 
+ 57.2s|     1 |     0 |  3770 |     - |2201M|   0 | 412 | 550k|1484 | 550k|3418 |1934 |   0 |   0 | 1.026801e+03 | 1.019748e+07 |  Large 
+ 59.3s|     1 |     0 |  4379 |     - |2206M|   0 | 411 | 550k|1484 | 550k|3816 |2332 |   0 |   0 | 1.151646e+03 | 1.019748e+07 |  Large 
+ 61.5s|     1 |     0 |  4987 |     - |2212M|   0 | 384 | 550k|1484 | 550k|4205 |2721 |   0 |   0 | 1.275662e+03 | 1.019748e+07 |  Large 
+ 63.7s|     1 |     0 |  5532 |     - |2216M|   0 | 359 | 550k|1484 | 550k|4562 |3078 |   0 |   0 | 1.374324e+03 | 1.019748e+07 |  Large 
+ 66.0s|     1 |     0 |  6061 |     - |2220M|   0 | 356 | 550k|1484 | 550k|4894 |3410 |   0 |   0 | 1.462396e+03 | 1.019748e+07 |  Large 
+ 68.2s|     1 |     0 |  6538 |     - |2227M|   0 | 341 | 550k|1484 | 550k|5220 |3736 |   0 |   0 | 1.536453e+03 | 1.019748e+07 |  Large 
+ 70.8s|     1 |     0 |  7088 |     - |2231M|   0 | 345 | 550k|1484 | 550k|5532 |4048 |   0 |   0 | 1.614638e+03 | 1.019748e+07 |  Large 
+ 73.3s|     1 |     0 |  7552 |     - |2237M|   0 | 308 | 550k|1484 | 550k|5833 |4349 |   0 |   0 | 1.676183e+03 | 1.019748e+07 |  Large 
+ 76.4s|     1 |     0 |  8110 |     - |2241M|   0 | 307 | 550k|1484 | 550k|6098 |4614 |   0 |   0 | 1.731364e+03 | 1.019748e+07 |  Large 
+ 79.4s|     1 |     0 |  8576 |     - |2247M|   0 | 343 | 550k|1484 | 550k|6354 |4870 |   0 |   0 | 1.772379e+03 | 1.019748e+07 |  Large 
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |vars |cons |cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+ 82.3s|     1 |     0 |  9078 |     - |2255M|   0 | 325 | 550k|1484 | 550k|6631 |5147 |   0 |   0 | 1.822145e+03 | 1.019748e+07 |  Large 
+ 85.5s|     1 |     0 |  9551 |     - |2260M|   0 | 314 | 550k|1484 | 550k|6901 |5417 |   0 |   0 | 1.867672e+03 | 1.019748e+07 |  Large 
+ 89.1s|     1 |     0 | 10105 |     - |2265M|   0 | 298 | 550k|1484 | 550k|7144 |5660 |   0 |   0 | 1.919033e+03 | 1.019748e+07 |  Large 
+  106s|     1 |     0 | 10613 |     - |2270M|   0 | 287 | 550k|1484 | 550k|7391 |5915 |   0 |   0 | 1.956954e+03 | 1.019748e+07 |  Large 
+  110s|     1 |     0 | 11001 |     - |2276M|   0 | 253 | 550k|1484 | 550k|7602 |6126 |   0 |   0 | 1.986734e+03 | 1.019748e+07 |  Large 
+  113s|     1 |     0 | 11436 |     - |2290M|   0 | 275 | 550k|1484 | 550k|7795 |6319 |   0 |   0 | 2.011155e+03 | 1.019748e+07 |  Large 
+  117s|     1 |     0 | 11849 |     - |2296M|   0 | 247 | 550k|1484 | 550k|7986 |6510 |   0 |   0 | 2.037175e+03 | 1.019748e+07 |  Large 
+  120s|     1 |     0 | 12306 |     - |2301M|   0 | 246 | 550k|1484 | 550k|8168 |6692 |   0 |   0 | 2.053966e+03 | 1.019748e+07 |  Large 
+  123s|     1 |     0 | 12691 |     - |2306M|   0 | 230 | 550k|1484 | 550k|8338 |6862 |   0 |   0 | 2.074121e+03 | 1.019748e+07 |  Large 
+  142s|     1 |     0 | 13103 |     - |2312M|   0 | 230 | 550k|1484 | 550k|8494 |7024 |   0 |   0 | 2.092369e+03 | 1.019748e+07 |  Large 
+  145s|     1 |     0 | 13501 |     - |2318M|   0 | 209 | 550k|1484 | 550k|8654 |7184 |   0 |   0 | 2.107344e+03 | 1.019748e+07 |  Large 
+  149s|     1 |     0 | 13936 |     - |2322M|   0 | 236 | 550k|1484 | 550k|8804 |7334 |   0 |   0 | 2.124815e+03 | 1.019748e+07 |  Large 
+  152s|     1 |     0 | 14321 |     - |2328M|   0 | 222 | 550k|1484 | 550k|8948 |7478 |   0 |   0 | 2.138450e+03 | 1.019748e+07 |  Large 
+  155s|     1 |     0 | 14726 |     - |2332M|   0 | 258 | 550k|1484 | 550k|9080 |7610 |   0 |   0 | 2.154638e+03 | 1.019748e+07 |  Large 
+  159s|     1 |     0 | 15099 |     - |2338M|   0 | 208 | 550k|1484 | 550k|9237 |7767 |   0 |   0 | 2.165829e+03 | 1.019748e+07 |  Large 
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |vars |cons |cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  180s|     1 |     0 | 15416 |     - |2342M|   0 | 213 | 550k|1484 | 550k|9351 |7888 |   0 |   0 | 2.178739e+03 | 1.019748e+07 |  Large 
+  183s|     1 |     0 | 15744 |     - |2346M|   0 | 211 | 550k|1484 | 550k|9475 |8012 |   0 |   0 | 2.189068e+03 | 1.019748e+07 |  Large 
+  186s|     1 |     0 | 16104 |     - |2350M|   0 | 189 | 550k|1484 | 550k|9608 |8145 |   0 |   0 | 2.200865e+03 | 1.019748e+07 |  Large 
+  189s|     1 |     0 | 16408 |     - |2353M|   0 | 183 | 550k|1484 | 550k|9730 |8267 |   0 |   0 | 2.206494e+03 | 1.019748e+07 |  Large 
+  193s|     1 |     0 | 16835 |     - |2356M|   0 | 206 | 550k|1484 | 550k|9854 |8391 |   0 |   0 | 2.213570e+03 | 1.019748e+07 |  Large 
+  197s|     1 |     0 | 17215 |     - |2361M|   0 | 195 | 550k|1484 | 550k|9952 |8489 |   0 |   0 | 2.223295e+03 | 1.019748e+07 |  Large 
+  222s|     1 |     0 | 17542 |     - |2365M|   0 | 185 | 550k|1484 | 550k|  10k|8599 |   0 |   0 | 2.231605e+03 | 1.019748e+07 |  Large 
+  225s|     1 |     0 | 17891 |     - |2369M|   0 | 190 | 550k|1484 | 550k|  10k|8702 |   0 |   0 | 2.239137e+03 | 1.019748e+07 |  Large 
+  228s|     1 |     0 | 18286 |     - |2374M|   0 | 181 | 550k|1484 | 550k|  10k|8808 |   0 |   0 | 2.244576e+03 | 1.019748e+07 |  Large 
+  232s|     1 |     0 | 18677 |     - |2376M|   0 | 170 | 550k|1484 | 550k|  10k|8876 |   0 |   0 | 2.251088e+03 | 1.019748e+07 |  Large 
+  235s|     1 |     0 | 19016 |     - |2377M|   0 | 187 | 550k|1484 | 550k|  10k|8947 |   0 |   0 | 2.256417e+03 | 1.019748e+07 |  Large 
+  238s|     1 |     0 | 19314 |     - |2380M|   0 | 202 | 550k|1484 | 550k|  10k|9034 |   0 |   0 | 2.260344e+03 | 1.019748e+07 |  Large 
+  267s|     1 |     0 | 19634 |     - |2383M|   0 | 180 | 550k|1484 | 550k|  10k|9112 |   0 |   0 | 2.263921e+03 | 1.019748e+07 |  Large 
+  270s|     1 |     0 | 19910 |     - |2385M|   0 | 178 | 550k|1484 | 550k|  10k|9177 |   0 |   0 | 2.266788e+03 | 1.019748e+07 |  Large 
+  273s|     1 |     0 | 20228 |     - |2388M|   0 | 137 | 550k|1484 | 550k|  10k|9265 |   0 |   0 | 2.269266e+03 | 1.019748e+07 |  Large 
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |vars |cons |cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  276s|     1 |     0 | 20498 |     - |2388M|   0 | 147 | 550k|1484 | 550k|  10k|9305 |   0 |   0 | 2.271877e+03 | 1.019748e+07 |  Large 
+  279s|     1 |     0 | 20708 |     - |2388M|   0 | 166 | 550k|1484 | 550k|  10k|9345 |   0 |   0 | 2.274133e+03 | 1.019748e+07 |  Large 
+  301s|     1 |     0 | 21025 |     - |2390M|   0 | 124 | 550k|1484 | 550k|  10k|9389 |   0 |   0 | 2.277531e+03 | 1.019748e+07 |  Large 
+  304s|     1 |     0 | 21342 |     - |2391M|   0 | 155 | 550k|1484 | 550k|  10k|9461 |   0 |   0 | 2.281107e+03 | 1.019748e+07 |  Large 
+  307s|     1 |     0 | 21701 |     - |2391M|   0 | 150 | 550k|1484 | 550k|  10k|9547 |   0 |   0 | 2.283128e+03 | 1.019748e+07 |  Large 
+  310s|     1 |     0 | 21953 |     - |2392M|   0 | 145 | 550k|1484 | 550k|  11k|9603 |   0 |   0 | 2.286168e+03 | 1.019748e+07 |  Large 
+  313s|     1 |     0 | 22278 |     - |2393M|   0 | 136 | 550k|1484 | 550k|  11k|9652 |   0 |   0 | 2.287712e+03 | 1.019748e+07 |  Large 
+  316s|     1 |     0 | 22583 |     - |2393M|   0 | 148 | 550k|1484 | 550k|  11k|9702 |   0 |   0 | 2.289592e+03 | 1.019748e+07 |  Large 
+  340s|     1 |     0 | 22876 |     - |2395M|   0 | 141 | 550k|1484 | 550k|  11k|9769 |   0 |   0 | 2.291897e+03 | 1.019748e+07 |  Large 
+  344s|     1 |     0 | 23226 |     - |2396M|   0 |  90 | 550k|1484 | 550k|  11k|9825 |   0 |   0 | 2.294510e+03 | 1.019748e+07 |  Large 
+  347s|     1 |     0 | 23584 |     - |2396M|   0 |  84 | 550k|1484 | 550k|  11k|9868 |   0 |   0 | 2.296037e+03 | 1.019748e+07 |  Large 
+  349s|     1 |     0 | 23871 |     - |2397M|   0 | 100 | 550k|1484 | 550k|  11k|9905 |   0 |   0 | 2.296956e+03 | 1.019748e+07 |  Large 
+  378s|     1 |     0 | 23975 |     - |2398M|   0 |  76 | 550k|1484 | 550k|  11k|9936 |   0 |   0 | 2.297434e+03 | 1.019748e+07 |  Large 
+  381s|     1 |     0 | 24141 |     - |2398M|   0 |  50 | 550k|1484 | 550k|  11k|9960 |   0 |   0 | 2.297628e+03 | 1.019748e+07 |  Large 
+  384s|     1 |     0 | 24408 |     - |2398M|   0 |  82 | 550k|1484 | 550k|  11k|9975 |   0 |   0 | 2.297955e+03 | 1.019748e+07 |  Large 
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |vars |cons |cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  386s|     1 |     0 | 24532 |     - |2398M|   0 |  23 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.298666e+03 | 1.019748e+07 |  Large 
+  388s|     1 |     0 | 24646 |     - |2399M|   0 |  54 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.298689e+03 | 1.019748e+07 |  Large 
+  389s|     1 |     0 | 24668 |     - |2399M|   0 |  72 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.298704e+03 | 1.019748e+07 |  Large 
+  391s|     1 |     0 | 24924 |     - |2399M|   0 |  72 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.299010e+03 | 1.019748e+07 |  Large 
+  394s|     1 |     0 | 25069 |     - |2401M|   0 |  53 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.299142e+03 | 1.019748e+07 |  Large 
+  421s|     1 |     0 | 25350 |     - |2401M|   0 |  84 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.299311e+03 | 1.019748e+07 |  Large 
+  424s|     1 |     0 | 25517 |     - |2401M|   0 |  59 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.299482e+03 | 1.019748e+07 |  Large 
+  426s|     1 |     0 | 25655 |     - |2402M|   0 |  68 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.299667e+03 | 1.019748e+07 |  Large 
+  429s|     1 |     0 | 25821 |     - |2403M|   0 |  32 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.299845e+03 | 1.019748e+07 |  Large 
+  454s|     1 |     0 | 26046 |     - |2403M|   0 |  53 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.300021e+03 | 1.019748e+07 |  Large 
+  457s|     1 |     0 | 26265 |     - |2405M|   0 |  65 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.300173e+03 | 1.019748e+07 |  Large 
+  459s|     1 |     0 | 26522 |     - |2405M|   0 |  77 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.300556e+03 | 1.019748e+07 |  Large 
+  461s|     1 |     0 | 26633 |     - |2405M|   0 |  43 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.300820e+03 | 1.019748e+07 |  Large 
+  493s|     1 |     0 | 26863 |     - |2405M|   0 |  54 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.301130e+03 | 1.019748e+07 |  Large 
+  495s|     1 |     0 | 26956 |     - |2405M|   0 |  82 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.301475e+03 | 1.019748e+07 |  Large 
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |vars |cons |cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+  497s|     1 |     0 | 27125 |     - |2405M|   0 |  69 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.301689e+03 | 1.019748e+07 |  Large 
+  499s|     1 |     0 | 27207 |     - |2405M|   0 |  42 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.301808e+03 | 1.019748e+07 |  Large 
+  503s|     1 |     0 | 27432 |     - |2407M|   0 |  63 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.301993e+03 | 1.019748e+07 |  Large 
+  528s|     1 |     0 | 27532 |     - |2407M|   0 |  23 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302195e+03 | 1.019748e+07 |  Large 
+  529s|     1 |     0 | 27600 |     - |2407M|   0 |  22 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302227e+03 | 1.019748e+07 |  Large 
+  532s|     1 |     0 | 27766 |     - |2407M|   0 |  57 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302325e+03 | 1.019748e+07 |  Large 
+  533s|     1 |     0 | 27774 |     - |2407M|   0 |   7 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302364e+03 | 1.019748e+07 |  Large 
+s 534s|     1 |     0 | 27774 |     - |2414M|   0 |   7 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302364e+03 | 2.516218e+03 |   9.29%
+  535s|     1 |     0 | 27861 |     - |2414M|   0 |  30 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302400e+03 | 2.516218e+03 |   9.29%
+  536s|     1 |     0 | 27861 |     - |2421M|   0 |  30 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302400e+03 | 2.516218e+03 |   9.29%
+  562s|     1 |     0 | 27876 |     - |2421M|   0 |  29 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302425e+03 | 2.516218e+03 |   9.29%
+  564s|     1 |     0 | 28036 |     - |2421M|   0 |  28 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302437e+03 | 2.516218e+03 |   9.28%
+  566s|     1 |     0 | 28083 |     - |2418M|   0 |  41 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302450e+03 | 2.516218e+03 |   9.28%
+  569s|     1 |     0 | 28252 |     - |2415M|   0 |  73 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302465e+03 | 2.516218e+03 |   9.28%
+  570s|     1 |     0 | 28272 |     - |2414M|   0 |   7 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302542e+03 | 2.516218e+03 |   9.28%
+ time | node  | left  |LP iter|LP it/n| mem |mdpt |frac |vars |cons |cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+F 623s|     1 |     0 | 38441 |     - |2505M|   0 |   0 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302542e+03 | 2.351505e+03 |   2.13%
+  637s|     1 |     0 | 38441 |     - |2515M|   0 |   7 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302542e+03 | 2.351505e+03 |   2.13%
+  638s|     1 |     0 | 38442 |     - |2508M|   0 |   7 | 550k|1484 | 550k|  11k|  10k|   0 |   0 | 2.302542e+03 | 2.351505e+03 |   2.13%
+SCIP nodes: 1 Estimation: -1
+  644s|     1 |     2 | 38442 |     - |2504M|   0 |   7 | 550k|1484 | 550k|  11k|  10k|   0 |   7 | 2.302827e+03 | 2.351505e+03 |   2.11%
+   (665.2s) symmetry computation started: requiring (bin +, int -, cont -), (fixed: bin -, int +, cont -)
+   (666.7s) symmetry computation finished: 43 generators found (max: 116, log10 of symmetry group size: 15.6)
+   (666.7s) turning off presolver <domcol> for remaining computations in order to avoid conflicts
+SCIP nodes: 2 Estimation: -1
+SCIP nodes: 4 Estimation: -1
+SCIP nodes: 8 Estimation: -1
+SCIP nodes: 16 Estimation: -1
+* 817s|    32 |    25 | 39244 | 353.9 |4234M|  12 |   - | 550k|1493 | 550k|  11k|  10k|  13 | 125 | 2.303770e+03 | 2.351403e+03 |   2.07%
+SCIP nodes: 32 Estimation: -1
+SCIP nodes: 64 Estimation: -1
+Report 1
+Time Elapsed: 1114.68
+  Tree Data        : 119 nodes (73 visited, 59 inner, 14 leaves, 46 open), progress: 0.0103
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :        2785           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :          27     0.98025     0.10063           1          27
+  progress         :        5077     0.01031     0.00039           1        5158
+  leaf-frequency   :         323     0.18493     0.00213           1         390
+  ssg              :         145     0.79930    -0.01359           1         142
+  open-nodes       :         146    46.00000     2.83415           1         144
+End of Report 1
+
+Report 2
+Time Elapsed: 1392.81
+  Tree Data        : 159 nodes (105 visited, 79 inner, 26 leaves, 54 open), progress: 0.0204
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :        3022           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :          54     0.98052     0.01215           1          53
+  progress         :        3288     0.02045     0.00061           1        4227
+  leaf-frequency   :         381     0.24286     0.00156           1         439
+  ssg              :         246     0.70850    -0.00728           1         273
+  open-nodes       :         210    54.00000     0.57415           1         209
+End of Report 2
+
+Report 3
+Time Elapsed: 1485.23
+  Tree Data        : 173 nodes (114 visited, 86 inner, 28 leaves, 59 open), progress: 0.1494
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :        2216           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :          60     0.98052     0.00854           1          59
+  progress         :         186     0.14935     0.01298           1         814
+  leaf-frequency   :        1060     0.24123     0.00052           1         914
+  ssg              :         261     0.69178    -0.00671           1         256
+  open-nodes       :         228    59.00000     0.83117           1         225
+End of Report 3
+
+Report 4
+Time Elapsed: 1486.36
+  Tree Data        : 173 nodes (115 visited, 86 inner, 29 leaves, 58 open), progress: 0.1533
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         374           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :          62     0.98052     0.00716           1          61
+  progress         :         198     0.15326     0.01205           1         352
+  leaf-frequency   :         654     0.24783     0.00084           1         719
+  ssg              :         302     0.69178    -0.00564           1         291
+  open-nodes       :         230    58.00000     0.62710           1         229
+End of Report 4
+
+Report 5
+Time Elapsed: 1488.16
+  Tree Data        : 173 nodes (117 visited, 86 inner, 31 leaves, 56 open), progress: 0.1846
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         390           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :          69     0.98052     0.00504           1          68
+  progress         :         201     0.18457     0.01162           1         215
+  leaf-frequency   :         361     0.26068     0.00159           1         399
+  ssg              :         410     0.69177    -0.00396           1         392
+  open-nodes       :         234    56.00000     0.26439           1         233
+End of Report 5
+
+SCIP nodes: 128 Estimation: -1
+Report 6
+Time Elapsed: 3034.13
+  Tree Data        : 207 nodes (146 visited, 103 inner, 43 leaves, 61 open), progress: 0.1905
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         444           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         146     0.98095     0.00063           1         142
+  progress         :         951     0.19051     0.00187           1         927
+  leaf-frequency   :        1325     0.29110     0.00034           1        1131
+  ssg              :        1084     0.66271    -0.00133           1        1033
+  open-nodes       :         292    61.00000     0.29042           1         297
+End of Report 6
+
+Report 7
+Time Elapsed: 3034.90
+  Tree Data        : 207 nodes (148 visited, 103 inner, 45 leaves, 59 open), progress: 0.2081
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         456           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         176     0.98095     0.00044           1         170
+  progress         :         612     0.20809     0.00303           1         704
+  leaf-frequency   :         529     0.30068     0.00091           1         619
+  ssg              :         672     0.64836    -0.00222           1         808
+  open-nodes       :         296    59.00000     0.04945           1         296
+End of Report 7
+
+Report 8
+Time Elapsed: 3035.15
+  Tree Data        : 207 nodes (150 visited, 103 inner, 47 leaves, 57 open), progress: 0.2105
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         440           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         216     0.98095     0.00031           1         209
+  progress         :         736     0.21053     0.00245           1         724
+  leaf-frequency   :         389     0.31000     0.00128           1         411
+  ssg              :         601     0.63779    -0.00251           1         600
+  open-nodes       :         888    57.00000    -0.14333           1        1095
+End of Report 8
+
+Report 9
+Time Elapsed: 3342.45
+  Tree Data        : 213 nodes (154 visited, 106 inner, 48 leaves, 59 open), progress: 0.2418
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         445           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         242     0.98095     0.00026           1         234
+  progress         :         391     0.24178     0.00512           1         474
+  leaf-frequency   :         614     0.30844     0.00074           1         563
+  ssg              :         466     0.62385    -0.00337           1         499
+  open-nodes       :         308    59.00000     0.05289           1         505
+End of Report 9
+
+Report 10
+Time Elapsed: 3373.14
+  Tree Data        : 215 nodes (156 visited, 107 inner, 49 leaves, 59 open), progress: 0.3668
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         396           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         272     0.98095     0.00022           1         263
+  progress         :         173     0.36678     0.01668           1         248
+  leaf-frequency   :         716     0.31090     0.00061           1         678
+  ssg              :         525     0.62385    -0.00291           1         519
+  open-nodes       :         312    59.00000     0.05673           1         360
+End of Report 10
+
+Report 11
+Time Elapsed: 3374.28
+  Tree Data        : 215 nodes (157 visited, 107 inner, 50 leaves, 58 open), progress: 0.4918
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         266           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         308     0.98095     0.00018           1         297
+  progress         :         137     0.49178     0.02697           1         165
+  leaf-frequency   :         552     0.31529     0.00081           1         584
+  ssg              :         331     0.59419    -0.00512           1         378
+  open-nodes       :        2891    58.00000    -0.04155           1        2258
+End of Report 11
+
+Report 12
+Time Elapsed: 3452.74
+  Tree Data        : 227 nodes (172 visited, 113 inner, 59 leaves, 55 open), progress: 0.5304
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         231           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         809     0.98161     0.00005           1         773
+  progress         :         219     0.53036     0.00916           1         226
+  leaf-frequency   :         487     0.34012     0.00086           1         571
+  ssg              :         417     0.51687    -0.00344           1         402
+  open-nodes       :         799    55.00000    -0.16135           1         915
+End of Report 12
+
+Report 13
+Time Elapsed: 3494.35
+  Tree Data        : 237 nodes (183 visited, 118 inner, 65 leaves, 54 open), progress: 0.5401
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         238           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         279     0.98425     0.00021           1         295
+  progress         :         360     0.54013     0.00398           1         353
+  leaf-frequency   :         506     0.35246     0.00078           1         602
+  ssg              :         264     0.43940    -0.00652           1         267
+  open-nodes       :         814    54.00000    -0.15764           1         942
+End of Report 13
+
+Report 14
+Time Elapsed: 3760.88
+  Tree Data        : 253 nodes (199 visited, 126 inner, 73 leaves, 54 open), progress: 0.5517
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         264           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         295     0.98617     0.00018           1         291
+  progress         :         603     0.55168     0.00196           1         641
+  leaf-frequency   :        1167     0.36432     0.00027           1         978
+  ssg              :         271     0.36841    -0.00583           1         270
+  open-nodes       :         398    54.00000     0.02766           1         403
+End of Report 14
+
+Report 15
+Time Elapsed: 3761.13
+  Tree Data        : 253 nodes (200 visited, 126 inner, 74 leaves, 53 open), progress: 0.6142
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         264           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         325     0.98617     0.00016           1         317
+  progress         :         246     0.61418     0.00779           1         345
+  leaf-frequency   :         594     0.36750     0.00059           1         690
+  ssg              :         247     0.34645    -0.00691           1         253
+  open-nodes       :        1588    53.00000    -0.07358           1        1291
+End of Report 15
+
+Report 16
+Time Elapsed: 3764.30
+  Tree Data        : 253 nodes (205 visited, 126 inner, 79 leaves, 48 open), progress: 0.6262
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         251           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         587     0.98617     0.00006           1         565
+  progress         :         322     0.62618     0.00454           1         321
+  leaf-frequency   :         411     0.38293     0.00092           1         413
+  ssg              :         267     0.31363    -0.00572           1         271
+  open-nodes       :         408    48.00000    -0.38187           1         423
+End of Report 16
+
+Report 17
+Time Elapsed: 3765.36
+  Tree Data        : 253 nodes (208 visited, 126 inner, 82 leaves, 45 open), progress: 0.6418
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         258           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         892     0.98617     0.00004           1         854
+  progress         :         331     0.64183     0.00425           1         344
+  leaf-frequency   :         405     0.39183     0.00089           1         406
+  ssg              :         341     0.31246    -0.00352           1         331
+  open-nodes       :         354    45.00000    -0.47144           1         359
+End of Report 17
+
+Report 18
+Time Elapsed: 3826.27
+  Tree Data        : 259 nodes (217 visited, 129 inner, 88 leaves, 42 open), progress: 0.6506
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         268           -           -           -           -
+  tree profile     :          -1           -           -           -           -
+  gap              :         430     0.98724     0.00010           1         496
+  progress         :         475     0.65063     0.00233           1         476
+  leaf-frequency   :         645     0.40323     0.00041           1         593
+  ssg              :         334     0.28384    -0.00357           1         341
+  open-nodes       :         440    42.00000    -0.31734           1         417
+End of Report 18
+
+Report 19
+Time Elapsed: 3927.85
+  Tree Data        : 265 nodes (225 visited, 132 inner, 93 leaves, 40 open), progress: 0.6638
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         279           -           -           -           -
+  tree profile     :         635           -           -           -           -
+  gap              :         796     0.98724     0.00004           1         764
+  progress         :         511     0.66381     0.00206           1         535
+  leaf-frequency   :         505     0.41111     0.00056           1         575
+  ssg              :         458     0.27647    -0.00203           1         446
+  open-nodes       :         460    40.00000    -0.29081           1         486
+End of Report 19
+
+Report 20
+Time Elapsed: 3928.74
+  Tree Data        : 265 nodes (227 visited, 132 inner, 95 leaves, 38 open), progress: 0.6716
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         282           -           -           -           -
+  tree profile     :         635           -           -           -           -
+  gap              :        1058     0.98724     0.00003           1        1013
+  progress         :         479     0.67163     0.00226           1         499
+  leaf-frequency   :         417     0.41630     0.00073           1         432
+  ssg              :         448     0.26854    -0.00208           1         440
+  open-nodes       :         388    38.00000    -0.38261           1         399
+End of Report 20
+
+Report 21
+Time Elapsed: 3989.10
+  Tree Data        : 277 nodes (236 visited, 138 inner, 98 leaves, 41 open), progress: 0.7073
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         286           -           -           -           -
+  tree profile     :         565           -           -           -           -
+  gap              :        1669     0.98724     0.00002           1        1593
+  progress         :         318     0.70727     0.00476           1         364
+  leaf-frequency   :         472     0.41314    -0.00023           1        1071
+  ssg              :         633     0.26854    -0.00123           1         610
+  open-nodes       :         472    41.00000     0.03573           1         586
+End of Report 21
+
+Report 22
+Time Elapsed: 3990.09
+  Tree Data        : 277 nodes (237 visited, 138 inner, 99 leaves, 40 open), progress: 0.7385
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         276           -           -           -           -
+  tree profile     :         565           -           -           -           -
+  gap              :        1955     0.98724     0.00001           1        1865
+  progress         :         269     0.73852     0.00723           1         293
+  leaf-frequency   :        7178     0.41561     0.00002           1        5651
+  ssg              :         719     0.26854    -0.00103           1         692
+  open-nodes       :        1728    40.00000    -0.05225           1        1442
+End of Report 22
+
+Report 23
+Time Elapsed: 3990.95
+  Tree Data        : 277 nodes (238 visited, 138 inner, 100 leaves, 39 open), progress: 0.7698
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         267           -           -           -           -
+  tree profile     :         837           -           -           -           -
+  gap              :        2296     0.98724     0.00001           1        2188
+  progress         :         248     0.76977     0.00933           1         260
+  leaf-frequency   :         713     0.41807     0.00032           1        1948
+  ssg              :         428     0.25349    -0.00222           1         494
+  open-nodes       :         757    39.00000    -0.13970           1         929
+End of Report 23
+
+Report 24
+Time Elapsed: 3990.95
+  Tree Data        : 277 nodes (239 visited, 138 inner, 101 leaves, 38 open), progress: 0.7707
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         259           -           -           -           -
+  tree profile     :         837           -           -           -           -
+  gap              :        2702     0.98724     0.00001           1        2574
+  progress         :         257     0.77075     0.00813           1         258
+  leaf-frequency   :         505     0.42050     0.00052           1         866
+  ssg              :         394     0.24685    -0.00255           1         419
+  open-nodes       :         556    38.00000    -0.21399           1         649
+End of Report 24
+
+Report 25
+Time Elapsed: 3992.75
+  Tree Data        : 277 nodes (242 visited, 138 inner, 104 leaves, 35 open), progress: 0.7874
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         266           -           -           -           -
+  tree profile     :         837           -           -           -           -
+  gap              :        4451     0.98724     0.00001           1        4233
+  progress         :         273     0.78735     0.00644           1         275
+  leaf-frequency   :         411     0.42769     0.00071           1         422
+  ssg              :         527     0.24685    -0.00154           1         511
+  open-nodes       :         395    35.00000    -0.37248           1         408
+End of Report 25
+
+Report 26
+Time Elapsed: 4020.39
+  Tree Data        : 285 nodes (248 visited, 142 inner, 106 leaves, 37 open), progress: 0.7952
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         266           -           -           -           -
+  tree profile     :         837           -           -           -           -
+  gap              :        3180     0.98728     0.00001           1        3638
+  progress         :         287     0.79518     0.00540           1         286
+  leaf-frequency   :        7879     0.42540     0.00002           1        6012
+  ssg              :         317     0.21393    -0.00405           1         380
+  open-nodes       :        1135    37.00000    -0.08006           1         947
+End of Report 26
+
+Report 27
+Time Elapsed: 4022.37
+  Tree Data        : 285 nodes (250 visited, 142 inner, 108 leaves, 35 open), progress: 0.8010
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         267           -           -           -           -
+  tree profile     :         837           -           -           -           -
+  gap              :         272     0.99087     0.00032           1         515
+  progress         :         306     0.80104     0.00438           1         302
+  leaf-frequency   :         689     0.43000     0.00030           1        1266
+  ssg              :         264     0.16842    -0.00694           1         274
+  open-nodes       :         547    35.00000    -0.21105           1         607
+End of Report 27
+
+Report 28
+Time Elapsed: 4499.23
+  Tree Data        : 303 nodes (265 visited, 151 inner, 114 leaves, 38 open), progress: 0.8134
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         280           -           -           -           -
+  tree profile     :         837           -           -           -           -
+  gap              :         380     0.99087     0.00012           1         372
+  progress         :         369     0.81337     0.00263           1         375
+  leaf-frequency   :         754     0.42830     0.00027           1         776
+  ssg              :         330     0.15808    -0.00307           1         324
+  open-nodes       :         530    38.00000     0.02356           1         529
+End of Report 28
+
+Report 29
+Time Elapsed: 4500.39
+  Tree Data        : 303 nodes (266 visited, 151 inner, 115 leaves, 37 open), progress: 0.8212
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         279           -           -           -           -
+  tree profile     :         837           -           -           -           -
+  gap              :         412     0.99087     0.00010           1         402
+  progress         :         347     0.82118     0.00302           1         354
+  leaf-frequency   :         567     0.43045     0.00041           1         619
+  ssg              :         320     0.14994    -0.00331           1         321
+  open-nodes       :        1275    37.00000    -0.07074           1        1089
+End of Report 29
+
+Report 30
+Time Elapsed: 5115.14
+  Tree Data        : 333 nodes (287 visited, 166 inner, 121 leaves, 46 open), progress: 0.8319
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         290           -           -           -           -
+  tree profile     :         837           -           -           -           -
+  gap              :         768     0.99087     0.00003           1         740
+  progress         :         410     0.83194     0.00199           1         424
+  leaf-frequency   :         574     0.41986    -0.00097           1         648
+  ssg              :         380     0.13901    -0.00200           1         388
+  open-nodes       :         574    46.00000     0.67935           1         585
+End of Report 30
+
+SCIP nodes: 256 Estimation: 837.457
+Report 31
+Time Elapsed: 6320.84
+  Tree Data        : 365 nodes (319 visited, 182 inner, 137 leaves, 46 open), progress: 0.8423
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         323           -           -           -           -
+  tree profile     :         882           -           -           -           -
+  gap              :         385     0.99271     0.00013           1         456
+  progress         :         632     0.84232     0.00088           1         738
+  leaf-frequency   :         613     0.42790     0.00042           1         613
+  ssg              :         313     0.07946    -0.00400           1         314
+  open-nodes       :         692    46.00000    -0.21960           1         740
+End of Report 31
+
+Report 32
+Time Elapsed: 6810.43
+  Tree Data        : 397 nodes (349 visited, 198 inner, 151 leaves, 48 open), progress: 0.9108
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         353           -           -           -           -
+  tree profile     :         882           -           -           -           -
+  gap              :         471     0.99420     0.00007           1         469
+  progress         :         329     0.91075     0.00638           1         531
+  leaf-frequency   :         653     0.43123     0.00039           1         689
+  ssg              :         350     0.05039    -0.00205           1         376
+  open-nodes       :         756    48.00000    -0.21081           1         884
+End of Report 32
+
+Report 33
+Time Elapsed: 7182.57
+  Tree Data        : 413 nodes (381 visited, 206 inner, 175 leaves, 32 open), progress: 0.9791
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         379           -           -           -           -
+  tree profile     :         903           -           -           -           -
+  gap              :         433     0.99655     0.00008           1         435
+  progress         :         356     0.97906     0.00633           1         497
+  leaf-frequency   :         552     0.45801     0.00041           1         558
+  ssg              :         554     0.03979    -0.00039           1         559
+  open-nodes       :         474    32.00000    -0.51028           1         477
+End of Report 33
+
+
+SCIP Status        : solving was interrupted [time limit reached]
+Solving Time (sec) : 7200.00
+Solving Nodes      : 345
+Primal Bound       : +2.35140310000008e+03 (7 solutions)
+Dual Bound         : +2.34329376579985e+03
+Gap                : 0.35 %
+  [linear] <R0025>: <C0024>[C] (+0) +<C0771>[C] (+0) +<C1518>[C] (+0) +<C2265>[C] (+0) +<C3012>[C] (+0) +<C3759>[C] (+0) +<C4506>[C] (+0) +<C5253>[C] (+0) +<C6000>[C] (+0) +<C6747>[C] (+0) +<C7494>[C] (+0) +<C8241>[C] (+0) +<C8988>[C] (+0) +<C9735>[C] (+0) +<C10482>[C] (+0) +<C11229>[C] (+0) +<C11976>[C] (+0) +<C12723>[C] (+0) +<C13470>[C] (+0) +<C14217>[C] (-3.70857593e-10) +<C14964>[C] (-4.50928546e-10) +<C15711>[C] (+0) +<C16458>[C] (+0) +<C17205>[C] (-9.70885514e-10) +<C17952>[C] (+0) +<C18699>[C] (-5.43991518e-10) +<C19446>[C] (+0) +<C20193>[C] (+0) +<C20940>[C] (+0) +<C21687>[C] (+0) +<C22434>[C] (+0) +<C23181>[C] (-2.64329003e-10) +<C23928>[C] (+0) +<C24675>[C] (+0) +<C25422>[C] (+0) +<C26169>[C] (+0) +<C26916>[C] (+0) +<C27663>[C] (+0) +<C28410>[C] (+0) +<C29157>[C] (+0) +<C29904>[C] (+0) +<C30651>[C] (+0) +<C31398>[C] (+0) +<C32145>[C] (+0) +<C32892>[C] (+0) +<C33639>[C] (+0) +<C34386>[C] (+0) +<C35133>[C] (+0) +<C35880>[C] (+0) +<C36627>[C] (+0) +<C37374>[C] (+0) +<C38121>[C] (+0) +<C38868>[C] (+0) +<C39615>[C] (+0) +<C40362>[C] (+0) +<C41109>[C] (+0) +<C41856>[C] (+0) +<C42603>[C] (+0) +<C43350>[C] (+0) +<C44097>[C] (+0) +<C44844>[C] (+0) +<C45591>[C] (-6.3529626e-10) +<C46338>[C] (-1.0697363e-09) +<C47085>[C] (+0) +<C47832>[C] (+0) +<C48579>[C] (+0) +<C49326>[C] (+0) +<C50073>[C] (+0) +<C50820>[C] (+0) +<C51567>[C] (+0) +<C52314>[C] (+0) +<C53061>[C] (+0) +<C53808>[C] (+0) +<C54555>[C] (+0) +<C55302>[C] (+0) +<C56049>[C] (+0) +<C56796>[C] (+0) +<C57543>[C] (+0) +<C58290>[C] (+0) +<C59037>[C] (+0) +<C59784>[C] (+0) +<C60531>[C] (+0) +<C61278>[C] (+0) +<C62025>[C] (+0) +<C62772>[C] (+0) +<C63519>[C] (+0) +<C64266>[C] (+0) +<C65013>[C] (+0) +<C65760>[C] (+0) +<C66507>[C] (+0) +<C67254>[C] (+0) +<C68001>[C] (+0) +<C68748>[C] (+0) +<C69495>[C] (+0) +<C70242>[C] (+0) +<C70989>[C] (+0) +<C71736>[C] (+0) +<C72483>[C] (+0) +<C73230>[C] (+0) +<C73977>[C] (+0) +<C74724>[C] (+0) +<C75471>[C] (+0) +<C76218>[C] (+0) +<C76965>[C] (+0) +<C77712>[C] (+0) +<C78459>[C] (+0) +<C79206>[C] (+0) +<C79953>[C] (+0) +<C80700>[C] (+0) +<C81447>[C] (+0) +<C82194>[C] (+0) +<C82941>[C] (+0) +<C83688>[C] (+0) +<C84435>[C] (+0) +<C85182>[C] (+0) +<C85929>[C] (+0) +<C86676>[C] (+0) +<C87423>[C] (+0) +<C88170>[C] (+0) +<C88917>[C] (+0) +<C89664>[C] (+0) +<C90411>[C] (+0) +<C91158>[C] (+0) +<C91905>[C] (+0) +<C92652>[C] (+0) +<C93399>[C] (+0) +<C94146>[C] (+0) +<C94893>[C] (+0) +<C95640>[C] (+0) +<C96387>[C] (+0) +<C97134>[C] (+0) +<C97881>[C] (+0) +<C98628>[C] (+0) +<C99375>[C] (+0) +<C100122>[C] (+0) +<C100869>[C] (+0) +<C101616>[C] (+0) +<C102363>[C] (+0) +<C103110>[C] (+0) +<C103857>[C] (+0) +<C104604>[C] (+0) +<C105351>[C] (+0) +<C106098>[C] (+0) +<C106845>[C] (+0) +<C107592>[C] (+0) +<C108339>[C] (+0) +<C109086>[C] (+0) +<C109833>[C] (+0) +<C110580>[C] (+0) +<C111327>[C] (+0) +<C112074>[C] (+0) +<C112821>[C] (+0) +<C113568>[C] (+0) +<C114315>[C] (+0) +<C115062>[C] (+0) +<C115809>[C] (+0) +<C116556>[C] (+0) +<C117303>[C] (+0) +<C118050>[C] (+0) +<C118797>[C] (+0) +<C119544>[C] (+0) +<C120291>[C] (+0) +<C121038>[C] (+0) +<C121785>[C] (+0) +<C122532>[C] (+0) +<C123279>[C] (+0) +<C124026>[C] (+0) +<C124773>[C] (+0) +<C125520>[C] (+0) +<C126267>[C] (+0) +<C127014>[C] (+0) +<C127761>[C] (+0) +<C128508>[C] (+0) +<C129255>[C] (+0) +<C130002>[C] (+0) +<C130749>[C] (+0) +<C131496>[C] (+0) +<C132243>[C] (+0) +<C132990>[C] (+0) +<C133737>[C] (+0) +<C134484>[C] (+0) +<C135231>[C] (+0) +<C135978>[C] (+0) +<C136725>[C] (+0) +<C137472>[C] (+0) +<C138219>[C] (+0) +<C138966>[C] (+0) +<C139713>[C] (+0) +<C140460>[C] (+0) +<C141207>[C] (+0) +<C141954>[C] (+0) +<C142701>[C] (+0) +<C143448>[C] (+0) +<C144195>[C] (+0) +<C144942>[C] (+0) +<C145689>[C] (+0) +<C146436>[C] (+0) +<C147183>[C] (+0) +<C147930>[C] (+0) +<C148677>[C] (+0) +<C149424>[C] (+0) +<C150171>[C] (+0) +<C150918>[C] (+0) +<C151665>[C] (+0) +<C152412>[C] (+0) +<C153159>[C] (+0) +<C153906>[C] (+0) +<C154653>[C] (+0) +<C155400>[C] (+0) +<C156147>[C] (+0) +<C156894>[C] (+0) +<C157641>[C] (+0) +<C158388>[C] (+0) +<C159135>[C] (+0) +<C159882>[C] (+0) +<C160629>[C] (+0) +<C161376>[C] (+0) +<C162123>[C] (+0) +<C162870>[C] (+0) +<C163617>[C] (+0) +<C164364>[C] (-8.05499667e-10) +<C165111>[C] (+0) +<C165858>[C] (-2.82265235e-10) +<C166605>[C] (+0) +<C167352>[C] (+0) +<C168099>[C] (+0) +<C168846>[C] (+0) +<C169593>[C] (+0) +<C170340>[C] (+0) +<C171087>[C] (+0) +<C171834>[C] (+0) +<C172581>[C] (+0) +<C173328>[C] (+0) +<C174075>[C] (+0) +<C174822>[C] (+0) +<C175569>[C] (+0) +<C176316>[C] (+0) +<C177063>[C] (+0) +<C177810>[C] (+0) +<C178557>[C] (+0) +<C179304>[C] (+0) +<C180051>[C] (+0) +<C180798>[C] (+0) +<C181545>[C] (+0) +<C182292>[C] (+0) +<C183039>[C] (+0) +<C183786>[C] (+0) +<C184533>[C] (+0) +<C185280>[C] (+0) +<C186027>[C] (+0) +<C186774>[C] (+0) +<C187521>[C] (+0) +<C188268>[C] (+0) +<C189015>[C] (+0) +<C189762>[C] (+0) +<C190509>[C] (+0) +<C191256>[C] (+0) +<C192003>[C] (+0) +<C192750>[C] (+0) +<C193497>[C] (+0) +<C194244>[C] (+0) +<C194991>[C] (+0) +<C195738>[C] (+0) +<C196485>[C] (-2.48419951e-10) +<C197232>[C] (-4.78005436e-10) +<C197979>[C] (+0) +<C198726>[C] (+0) +<C199473>[C] (+0) +<C200220>[C] (+0) +<C200967>[C] (+0) +<C201714>[C] (+0) +<C202461>[C] (-2.6094682e-10) +<C203208>[C] (+0) +<C203955>[C] (+0) +<C204702>[C] (+0) +<C205449>[C] (+0) +<C206196>[C] (+0) +<C206943>[C] (+0) +<C207690>[C] (+0) +<C208437>[C] (+0) +<C209184>[C] (+0) +<C209931>[C] (+0) +<C210678>[C] (+0) +<C211425>[C] (+0) +<C212172>[C] (+0) +<C212919>[C] (+0) +<C213666>[C] (+0) +<C214413>[C] (+0) +<C215160>[C] (+0) +<C215907>[C] (+0) +<C216654>[C] (+0) +<C217401>[C] (+0) +<C218148>[C] (+0) +<C218895>[C] (+0) +<C219642>[C] (+0) +<C220389>[C] (+0) +<C221136>[C] (+0) +<C221883>[C] (+0) +<C222630>[C] (+0) +<C223377>[C] (+0) +<C224124>[C] (+0) +<C224871>[C] (+0) +<C225618>[C] (+0) +<C226365>[C] (+0) +<C227112>[C] (+0) +<C227859>[C] (+0) +<C228606>[C] (+0) +<C229353>[C] (+0) +<C230100>[C] (+0) +<C230847>[C] (+0) +<C231594>[C] (+0) +<C232341>[C] (+0) +<C233088>[C] (+0) +<C233835>[C] (+0) +<C234582>[C] (+0) +<C235329>[C] (+0) +<C236076>[C] (-3.05056212e-11) +<C236823>[C] (-1.95992313e-10) +<C237570>[C] (+0) +<C238317>[C] (+0) +<C239064>[C] (+0) +<C239811>[C] (+0) +<C240558>[C] (+0) +<C241305>[C] (+0) +<C242052>[C] (+0) +<C242799>[C] (+0) +<C243546>[C] (+0) +<C244293>[C] (+0) +<C245040>[C] (+0) +<C245787>[C] (+0) +<C246534>[C] (+0) +<C247281>[C] (+0) +<C248028>[C] (+0) +<C248775>[C] (+0) +<C249522>[C] (+0) +<C250269>[C] (+0) +<C251016>[C] (+0) +<C251763>[C] (+0) +<C252510>[C] (+0) +<C253257>[C] (+0) +<C254004>[C] (+0) +<C254751>[C] (+0) +<C255498>[C] (+0) +<C256245>[C] (+0) +<C256992>[C] (+0) +<C257739>[C] (+0) +<C258486>[C] (+0) +<C259233>[C] (+0) +<C259980>[C] (+0) +<C260727>[C] (+0) +<C261474>[C] (+0) +<C262221>[C] (+0) +<C262968>[C] (+0) +<C263715>[C] (+0) +<C264462>[C] (+0) +<C265209>[C] (+0) +<C265956>[C] (+0) +<C266703>[C] (+0) +<C267450>[C] (+0) +<C268197>[C] (+0) +<C268944>[C] (+0) +<C269691>[C] (+0) +<C270438>[C] (+0) +<C271185>[C] (+0) +<C271932>[C] (+0) +<C272679>[C] (+0) +<C273426>[C] (+0) +<C274173>[C] (+0) +<C274920>[C] (+0) +<C275667>[C] (+0) +<C276414>[C] (+0) +<C277161>[C] (+0) +<C277908>[C] (+0) +<C278655>[C] (+0) +<C279402>[C] (+0) +<C280149>[C] (+0) +<C280896>[C] (+0) +<C281643>[C] (+0) +<C282390>[C] (+0) +<C283137>[C] (+0) +<C283884>[C] (+0) +<C284631>[C] (+0) +<C285378>[C] (+0) +<C286125>[C] (+0) +<C286872>[C] (+0) +<C287619>[C] (+0) +<C288366>[C] (+0) +<C289113>[C] (+0) +<C289860>[C] (+0) +<C290607>[C] (+0) +<C291354>[C] (+0) +<C292101>[C] (+0) +<C292848>[C] (+0) +<C293595>[C] (+0) +<C294342>[C] (+0) +<C295089>[C] (+0) +<C295836>[C] (+0) +<C296583>[C] (+0) +<C297330>[C] (+0) +<C298077>[C] (+0) +<C298824>[C] (+0) +<C299571>[C] (+0) +<C300318>[C] (+0) +<C301065>[C] (+0) +<C301812>[C] (+0) +<C302559>[C] (+0) +<C303306>[C] (+0) +<C304053>[C] (+0) +<C304800>[C] (+0) +<C305547>[C] (+0) +<C306294>[C] (+0) +<C307041>[C] (+0) +<C307788>[C] (+0) +<C308535>[C] (+0) +<C309282>[C] (+0) +<C310029>[C] (+0) +<C310776>[C] (+0) +<C311523>[C] (+0) +<C312270>[C] (+0) +<C313017>[C] (+0) +<C313764>[C] (+0) +<C314511>[C] (+0) +<C315258>[C] (+0) +<C316005>[C] (+0) +<C316752>[C] (+0) +<C317499>[C] (+0) +<C318246>[C] (+0) +<C318993>[C] (+0) +<C319740>[C] (+0) +<C320487>[C] (+0) +<C321234>[C] (+0) +<C321981>[C] (+0) +<C322728>[C] (+0) +<C323475>[C] (+0) +<C324222>[C] (+0) +<C324969>[C] (+0) +<C325716>[C] (+0) +<C326463>[C] (+0) +<C327210>[C] (+0) +<C327957>[C] (+0) +<C328704>[C] (+0) +<C329451>[C] (+0) +<C330198>[C] (+0) +<C330945>[C] (+0) +<C331692>[C] (+0) +<C332439>[C] (+0) +<C333186>[C] (+0) +<C333933>[C] (+0) +<C334680>[C] (+0) +<C335427>[C] (+0) +<C336174>[C] (+0) +<C336921>[C] (+0) +<C337668>[C] (+0) +<C338415>[C] (+0) +<C339162>[C] (+0) +<C339909>[C] (+0) +<C340656>[C] (+0) +<C341403>[C] (+0) +<C342150>[C] (+0) +<C342897>[C] (+0) +<C343644>[C] (+0) +<C344391>[C] (+0) +<C345138>[C] (+0) +<C345885>[C] (+0) +<C346632>[C] (+0) +<C347379>[C] (+0) +<C348126>[C] (+0) +<C348873>[C] (+0) +<C349620>[C] (+0) +<C350367>[C] (+0) +<C351114>[C] (+0) +<C351861>[C] (+0) +<C352608>[C] (+0) +<C353355>[C] (+0) +<C354102>[C] (+0) +<C354849>[C] (+0) +<C355596>[C] (+0) +<C356343>[C] (+0) +<C357090>[C] (+0) +<C357837>[C] (+0) +<C358584>[C] (+0) +<C359331>[C] (+0) +<C360078>[C] (+0) +<C360825>[C] (+0) +<C361572>[C] (+0) +<C362319>[C] (+0) +<C363066>[C] (+0) +<C363813>[C] (+0) +<C364560>[C] (+0) +<C365307>[C] (+0) +<C366054>[C] (+0) +<C366801>[C] (+0) +<C367548>[C] (+0) +<C368295>[C] (+0) +<C369042>[C] (+0) +<C369789>[C] (+0) +<C370536>[C] (+0) +<C371283>[C] (+0) +<C372030>[C] (+0) +<C372777>[C] (+0) +<C373524>[C] (+0) +<C374271>[C] (+0) +<C375018>[C] (+0) +<C375765>[C] (+0) +<C376512>[C] (+0) +<C377259>[C] (+0) +<C378006>[C] (+0) +<C378753>[C] (+0) +<C379500>[C] (+0) +<C380247>[C] (+0) +<C380994>[C] (+0) +<C381741>[C] (+0) +<C382488>[C] (+0) +<C383235>[C] (+0) +<C383982>[C] (+0) +<C384729>[C] (+0) +<C385476>[C] (+0) +<C386223>[C] (+0) +<C386970>[C] (+0) +<C387717>[C] (+0) +<C388464>[C] (+0) +<C389211>[C] (+0) +<C389958>[C] (+0) +<C390705>[C] (+0) +<C391452>[C] (+0) +<C392199>[C] (+0) +<C392946>[C] (+0) +<C393693>[C] (+0) +<C394440>[C] (+0) +<C395187>[C] (+0) +<C395934>[C] (+0) +<C396681>[C] (+0) +<C397428>[C] (+0) +<C398175>[C] (+0) +<C398922>[C] (+0) +<C399669>[C] (+0) +<C400416>[C] (+0) +<C401163>[C] (+0) +<C401910>[C] (+0) +<C402657>[C] (+0) +<C403404>[C] (+0) +<C404151>[C] (+0) +<C404898>[C] (+0) +<C405645>[C] (+0) +<C406392>[C] (+0) +<C407139>[C] (+0) +<C407886>[C] (+0) +<C408633>[C] (+0) +<C409380>[C] (+0) +<C410127>[C] (+0) +<C410874>[C] (+0) +<C411621>[C] (+0) +<C412368>[C] (+0) +<C413115>[C] (+0) +<C413862>[C] (+0) +<C414609>[C] (+0) +<C415356>[C] (+0) +<C416103>[C] (+0) +<C416850>[C] (+0) +<C417597>[C] (+0) +<C418344>[C] (+0) +<C419091>[C] (+0) +<C419838>[C] (+0) +<C420585>[C] (+0) +<C421332>[C] (+0) +<C422079>[C] (+0) +<C422826>[C] (+0) +<C423573>[C] (+0) +<C424320>[C] (+0) +<C425067>[C] (+0) +<C425814>[C] (+0) +<C426561>[C] (+0) +<C427308>[C] (+0) +<C428055>[C] (+0) +<C428802>[C] (+0) +<C429549>[C] (+0) +<C430296>[C] (+0) +<C431043>[C] (+0) +<C431790>[C] (+0) +<C432537>[C] (+0) +<C433284>[C] (+0) +<C434031>[C] (+0) +<C434778>[C] (+0) +<C435525>[C] (+0) +<C436272>[C] (+0) +<C437019>[C] (+0) +<C437766>[C] (+0) +<C438513>[C] (+0) +<C439260>[C] (+0) +<C440007>[C] (+0) +<C440754>[C] (+0) +<C441501>[C] (+0) +<C442248>[C] (+0) +<C442995>[C] (+0) +<C443742>[C] (-4.14019265e-10) +<C444489>[C] (+0) +<C445236>[C] (+0) +<C445983>[C] (+0) +<C446730>[C] (+0) +<C447477>[C] (+0) +<C448224>[C] (+0) +<C448971>[C] (+0) +<C449718>[C] (+0) +<C450465>[C] (+0) +<C451212>[C] (+0) +<C451959>[C] (-1.97751149e-10) +<C452706>[C] (+0) +<C453453>[C] (+0) +<C454200>[C] (+0) +<C454947>[C] (+0) +<C455694>[C] (+0) +<C456441>[C] (+0) +<C457188>[C] (+0) +<C457935>[C] (+0) +<C458682>[C] (+0) +<C459429>[C] (+0) +<C460176>[C] (+0) +<C460923>[C] (+0) +<C461670>[C] (+0) +<C462417>[C] (+0) +<C463164>[C] (+0) +<C463911>[C] (+0) +<C464658>[C] (+0) +<C465405>[C] (+0) +<C466152>[C] (+0) +<C466899>[C] (+0) +<C467646>[C] (+0) +<C468393>[C] (+0) +<C469140>[C] (+0) +<C469887>[C] (+0) +<C470634>[C] (+0) +<C471381>[C] (+0) +<C472128>[C] (+0) +<C472875>[C] (+0) +<C473622>[C] (+0) +<C474369>[C] (+0) +<C475116>[C] (+0) +<C475863>[C] (+0) +<C476610>[C] (+0) +<C477357>[C] (+0) +<C478104>[C] (+0) +<C478851>[C] (+0) +<C479598>[C] (+0) +<C480345>[C] (+0) +<C481092>[C] (+0) +<C481839>[C] (+0) +<C482586>[C] (+0) +<C483333>[C] (+0) +<C484080>[C] (+0) +<C484827>[C] (+0) +<C485574>[C] (+0) +<C486321>[C] (+0) +<C487068>[C] (+0) +<C487815>[C] (+0) +<C488562>[C] (+0) +<C489309>[C] (+0) +<C490056>[C] (+0) +<C490803>[C] (+0) +<C491550>[C] (+0) +<C492297>[C] (+0) +<C493044>[C] (+0) +<C493791>[C] (+0) +<C494538>[C] (+0) +<C495285>[C] (+0) +<C496032>[C] (+0) +<C496779>[C] (+0) +<C497526>[C] (+0) +<C498273>[C] (+0) +<C499020>[C] (+0) +<C499767>[C] (+0) +<C500514>[C] (+0) +<C501261>[C] (+0) +<C502008>[C] (+0) +<C502755>[C] (+0) +<C503502>[C] (+0) +<C504249>[C] (+0) +<C504996>[C] (+0) +<C505743>[C] (+0) +<C506490>[C] (+0) +<C507237>[C] (+0) +<C507984>[C] (+0) +<C508731>[C] (+0) +<C509478>[C] (+0) +<C510225>[C] (+0) +<C510972>[C] (+0) +<C511719>[C] (+0) +<C512466>[C] (+0) +<C513213>[C] (+0) +<C513960>[C] (+0) +<C514707>[C] (+0) +<C515454>[C] (+0) +<C516201>[C] (+0) +<C516948>[C] (+0) +<C517695>[C] (+0) +<C518442>[C] (+0) +<C519189>[C] (+0) +<C519936>[C] (+0) +<C520683>[C] (+0) +<C521430>[C] (+0) +<C522177>[C] (+0) +<C522924>[C] (+0) +<C523671>[C] (+0) +<C524418>[C] (+0) +<C525165>[C] (+0) +<C525912>[C] (+0) +<C526659>[C] (+0) +<C527406>[C] (+0) +<C528153>[C] (+0) +<C528900>[C] (+0) +<C529647>[C] (+0) +<C530394>[C] (+0) +<C531141>[C] (+0) +<C531888>[C] (+0) +<C532635>[C] (+0) +<C533382>[C] (+0) +<C534129>[C] (+0) +<C534876>[C] (+0) +<C535623>[C] (+0) +<C536370>[C] (+0) +<C537117>[C] (+0) +<C537864>[C] (+0) +<C538611>[C] (+0) +<C539358>[C] (+0) +<C540105>[C] (+0) +<C540852>[C] (+0) +<C541599>[C] (+0) +<C542346>[C] (+0) +<C543093>[C] (+0) +<C543840>[C] (+0) +<C544587>[C] (+0) +<C545334>[C] (+0) +<C546081>[C] (+0) +<C546828>[C] (+0) +<C547575>[C] (+0) +<C548322>[C] (+0) +<C549069>[C] (+0) -999999<C549816>[B] (-5.04225144e-12) <= 0;
+;
+violation: right hand side is violated by 5.03502696396952e-06
+best solution is not feasible in original problem
+
+SCIP> display statistics
+
+SCIP Status        : solving was interrupted [time limit reached]
+Total Time         :    7200.76
+  solving          :    7200.00
+  presolving       :      44.54 (included in solving)
+  reading          :       0.76
+  copying          :       3.02 (6 #copies) (minimal 0.48, maximal 0.51, average 0.50)
+Original Problem   :
+  Problem name     : file
+  Variables        : 550539 (747 binary, 0 integer, 0 implicit integer, 549792 continuous)
+  Constraints      : 1484 initial, 1484 maximal
+  Objective        : minimize, 548865 non-zeros (abs.min = 0.01, abs.max = 999)
+Presolved Problem  :
+  Problem name     : t_file
+  Variables        : 550539 (747 binary, 0 integer, 0 implicit integer, 549792 continuous)
+  Constraints      : 1484 initial, 1677 maximal
+  Objective        : minimize, 548865 non-zeros (abs.min = 0.01, abs.max = 999)
+Presolvers         :   ExecTime  SetupTime  Calls  FixedVars   AggrVars   ChgTypes  ChgBounds   AddHoles    DelCons    AddCons   ChgSides   ChgCoefs
+  boundshift       :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  convertinttobin  :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  domcol           :       2.67       0.00      1          0          0          0          0          0          0          0          0          0
+  dualagg          :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  dualcomp         :       0.41       0.00      1          0          0          0          0          0          0          0          0          0
+  dualinfer        :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  gateextraction   :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  implics          :       0.00       0.00      1          0          0          0          0          0          0          0          0          0
+  inttobinary      :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  qpkktref         :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  redvub           :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  sparsify         :       0.39       0.00      1          0          0          0          0          0          0          0          0          0
+  stuffing         :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  symbreak         :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  symmetry         :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  trivial          :       0.02       0.00      2          0          0          0          0          0          0          0          0          0
+  tworowbnd        :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  dualfix          :       0.04       0.00      2          0          0          0          0          0          0          0          0          0
+  genvbounds       :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  orbitalfixing    :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  probing          :      38.78       0.01      1          0          0          0          0          0          0          0          0          0
+  pseudoobj        :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  vbounds          :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  setppc           :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  linear           :       1.38       0.20      3          0          0          0    1099584          0          0          0          0        747
+  logicor          :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  benders          :       0.00       0.00      0          0          0          0          0          0          0          0          0          0
+  components       :       0.26       0.00      1          0          0          0          0          0          0          0          0          0
+  root node        :          -          -      -          4          -          -    1213283          -          -          -          -          -
+Constraints        :     Number  MaxNumber  #Separate #Propagate    #EnfoLP    #EnfoRelax  #EnfoPS    #Check   #ResProp    Cutoffs    DomReds       Cuts    Applied      Conss   Children
+  benderslp        :          0          0          0          0        779          0          0        142          0          0          0          0          0          0          0
+  integral         :          0          0          0          0        779          0          0        142          0          0     409127          0          0        612        414
+  setppc           :          0+        16          0       5561          0          0          0          0         20         12         44          0          0          0          0
+  linear           :       1484       1484         88      23800          0          0          0        136       2463          0     501954          0          0          0          0
+  logicor          :          0+       267          0       1238          0          0          0          0        181         58        187          0          0          0          0
+  benders          :          0          0          0          0          0          0          0          7          0          0          0          0          0          0          0
+  countsols        :          0          0          0          0          0          0          0          7          0          0          0          0          0          0          0
+  components       :          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0
+Constraint Timings :  TotalTime  SetupTime   Separate  Propagate     EnfoLP     EnfoPS     EnfoRelax   Check    ResProp    SB-Prop
+  benderslp        :       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00
+  integral         :    1571.04       0.00       0.00       0.00    1571.04       0.00       0.00       0.00       0.00       0.00
+  setppc           :       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00
+  linear           :      44.64       0.20      11.86      30.04       0.00       0.00       0.00       0.76       0.15       1.63
+  logicor          :       0.02       0.00       0.00       0.02       0.00       0.00       0.00       0.00       0.00       0.00
+  benders          :       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00
+  countsols        :       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00       0.00
+  components       :       0.02       0.00       0.00       0.02       0.00       0.00       0.00       0.00       0.00       0.00
+Propagators        : #Propagate   #ResProp    Cutoffs    DomReds
+  dualfix          :          5          0          0          0
+  genvbounds       :          0          0          0          0
+  nlobbt           :          0          0          0          0
+  obbt             :          0          0          0          0
+  orbitalfixing    :        665          0          0        138
+  probing          :          0          0          0          0
+  pseudoobj        :       2708          0          0     544472
+  redcost          :       2037          0          0        148
+  rootredcost      :          2          0          0     314511
+  vbounds          :      22370          0          0          0
+Propagator Timings :  TotalTime  SetupTime   Presolve  Propagate    ResProp    SB-Prop
+  dualfix          :       0.14       0.00       0.04       0.10       0.00       0.00
+  genvbounds       :       0.01       0.00       0.00       0.01       0.00       0.00
+  nlobbt           :       0.00       0.00       0.00       0.00       0.00       0.00
+  obbt             :       0.00       0.00       0.00       0.00       0.00       0.00
+  orbitalfixing    :      54.13       0.00       0.00      54.13       0.00       0.00
+  probing          :      38.79       0.01      38.78       0.00       0.00       0.00
+  pseudoobj        :      12.99       0.00       0.00      12.99       0.00       0.00
+  redcost          :      30.17       0.00       0.00      30.16       0.00       0.01
+  rootredcost      :       0.35       0.00       0.00       0.34       0.00       0.01
+  vbounds          :       0.58       0.00       0.00       0.57       0.00       0.01
+Orbital fixing     :
+  vars fixed to 0  :        138
+  vars fixed to 1  :          0
+Conflict Analysis  :       Time      Calls    Success    DomReds  Conflicts   Literals    Reconvs ReconvLits   Dualrays   Nonzeros   LP Iters   (pool size: [10000,10000])
+  propagation      :       0.00         70         25          -         25        5.1          0        0.0          -          -          -
+  infeasible LP    :       0.00          0          0          -          0        0.0          0        0.0          0        0.0          0
+  bound exceed. LP :     264.05        630     353429          -        663        7.1          0        0.0     352826        1.0      11484
+  strong branching :       0.00          0          0          -          0        0.0          0        0.0          -          -          0
+  pseudo solution  :       0.00          0          0          -          0        0.0          0        0.0          -          -          -
+  applied globally :       0.01          -          -     352826        199        5.4          -          -     352826          -          -
+  applied locally  :          -          -          -          0        442        7.0          -          -          0          -          -
+Separators         :   ExecTime  SetupTime      Calls    Cutoffs    DomReds       Cuts    Applied      Conss
+  cut pool         :       8.86                   606          -          -      21131          -          -    (maximal pool size: 29991)
+  aggregation      :      74.17       0.00        316          0          0          0          0          0
+  cgmip            :       0.00       0.00          0          0          0          0          0          0
+  clique           :       0.00       0.00          1          0          0          0          0          0
+  closecuts        :       0.00       0.00          0          0          0          0          0          0
+  cmir             :       0.00       0.00          0          0          0          0        215          0
+  convexproj       :       0.00       0.00          0          0          0          0          0          0
+  disjunctive      :       0.00       0.00          0          0          0          0          0          0
+  eccuts           :       0.00       0.00          0          0          0          0          0          0
+  flowcover        :       0.00       0.00          0          0          0          0          0          0
+  gauge            :       0.00       0.00          0          0          0          0          0          0
+  gomory           :       0.60       0.00        125          0          0          0          0          0
+  impliedbounds    :       6.66       0.00        316          0          0          0      11858          0
+  intobj           :       0.00       0.00          0          0          0          0          0          0
+  mcf              :       0.06       0.00          1          0          0          0          0          0
+  oddcycle         :       0.00       0.00          0          0          0          0          0          0
+  rapidlearning    :       0.00       0.00          0          0          0          0          0          0
+  strongcg         :       0.17       0.00         20          0          0          0          0          0
+  zerohalf         :      17.15       0.00        135          0          0          0          0          0
+Pricers            :   ExecTime  SetupTime      Calls       Vars
+  problem variables:       0.00          -          0          0
+Branching Rules    :   ExecTime  SetupTime   BranchLP  BranchExt   BranchPS    Cutoffs    DomReds       Cuts      Conss   Children
+  allfullstrong    :       0.00       0.00          0          0          0          0          0          0          0          0
+  cloud            :       0.00       0.00          0          0          0          0          0          0          0          0
+  distribution     :       0.00       0.00          0          0          0          0          0          0          0          0
+  fullstrong       :       0.00       0.00          0          0          0          0          0          0          0          0
+  inference        :       0.00       0.00          0          0          0          0          0          0          0          0
+  leastinf         :       0.00       0.00          0          0          0          0          0          0          0          0
+  lookahead        :       0.00       0.00          0          0          0          0          0          0          0          0
+  mostinf          :       0.00       0.00          0          0          0          0          0          0          0          0
+  multaggr         :       0.00       0.00          0          0          0          0          0          0          0          0
+  nodereopt        :       0.00       0.00          0          0          0          0          0          0          0          0
+  pscost           :       0.00       0.00          0          0          0          0          0          0          0          0
+  random           :       0.00       0.00          0          0          0          0          0          0          0          0
+  relpscost        :    1571.03       0.00        779          0          0          0     409127          0        612        414
+Primal Heuristics  :   ExecTime  SetupTime      Calls      Found       Best
+  LP solutions     :       0.00          -          -          0          0
+  relax solutions  :       0.00          -          -          0          0
+  pseudo solutions :       0.00          -          -          0          0
+  strong branching :       0.08          -          -          1          1
+  actconsdiving    :       0.00       0.00          0          0          0
+  alns             :      33.84       0.00          3          0          0
+  bound            :       0.00       0.00          0          0          0
+  clique           :       0.00       0.00          0          0          0
+  coefdiving       :       3.00       0.00          3          0          0
+  completesol      :       0.00       0.00          0          0          0
+  conflictdiving   :       0.00       0.00          0          0          0
+  crossover        :       5.82       0.00          1          1          0
+  dins             :       0.00       0.00          0          0          0
+  distributiondivin:      21.09       0.00          2          0          0
+  dualval          :       0.00       0.00          0          0          0
+  farkasdiving     :       0.00       0.00          0          0          0
+  feaspump         :      51.74       0.00          1          1          1
+  fixandinfer      :       0.00       0.00          0          0          0
+  fracdiving       :       2.42       0.00          3          0          0
+  gins             :       0.27       0.00          0          0          0
+  guideddiving     :       2.49       0.00          2          0          0
+  indicator        :       0.00       0.00          0          0          0
+  intdiving        :       0.00       0.00          0          0          0
+  intshifting      :       1.06       0.00          3          0          0
+  linesearchdiving :       1.38       0.00          2          0          0
+  localbranching   :       0.00       0.00          0          0          0
+  locks            :       1.87       0.00          1          1          1
+  lpface           :       0.00       0.00          0          0          0
+  mpec             :       0.00       0.00          0          0          0
+  multistart       :       0.00       0.00          0          0          0
+  mutation         :       0.00       0.00          0          0          0
+  nlpdiving        :       0.00       0.00          0          0          0
+  objpscostdiving  :    1587.95       0.00          2          0          0
+  octane           :       0.00       0.00          0          0          0
+  ofins            :       0.00       0.00          0          0          0
+  oneopt           :       0.52       0.00          4          0          0
+  proximity        :       0.00       0.00          0          0          0
+  pscostdiving     :      26.70       0.00          2          0          0
+  randrounding     :      24.59       0.00        125          0          0
+  rens             :       4.14       0.00          1          0          0
+  reoptsols        :       0.00       0.00          0          0          0
+  repair           :       0.00       0.00          0          0          0
+  rins             :       4.57       0.00          1          1          0
+  rootsoldiving    :     296.55       0.00          1          0          0
+  rounding         :       0.57       0.00        384          0          0
+  shiftandpropagate:       0.00       0.00          0          0          0
+  shifting         :      24.24       0.00        438          2          1
+  simplerounding   :       0.00       0.00          0          0          0
+  subnlp           :       0.00       0.00          0          0          0
+  trivial          :       0.59       0.00          2          0          0
+  trivialnegation  :       0.00       0.00          0          0          0
+  trysol           :       0.00       0.00          0          0          0
+  twoopt           :       0.00       0.00          0          0          0
+  undercover       :       0.00       0.00          0          0          0
+  vbounds          :       0.06       0.00          0          0          0
+  veclendiving     :       1.17       0.00          2          0          0
+  zeroobj          :       0.00       0.00          0          0          0
+  zirounding       :       0.29       0.00        204          0          0
+  other solutions  :          -          -          -          0          -
+Diving Statistics  :      Calls      Nodes   LP Iters Backtracks  Conflicts   MinDepth   MaxDepth   AvgDepth  RoundSols  NLeafSols  MinSolDpt  MaxSolDpt  AvgSolDpt
+  actconsdiving    :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  coefdiving       :          3         60          7          0          4         27         38       33.7          0          -          -          -          -
+  conflictdiving   :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  distributiondivin:          2         48       1415          1          2         23         48       35.5          0          -          -          -          -
+  farkasdiving     :          0          -          -          -          -          -          -          -          -          -          -          -          -
+  fracdiving       :          3         50        157          0          3         25         38       30.0          0          -          -          -          -
+  guideddiving     :          2         43        115          0          2         25         46       35.5          0          -          -          -          -
+  linesearchdiving :          2         74         12          0          3         50         52       51.0          0          -          -          -          -
+  pscostdiving     :          2        172       1615          2          3         72        129      100.5          0          -          -          -          -
+  veclendiving     :          2         47          4          0          2         27         40       33.5          0          -          -          -          -
+Neighborhoods      :      Calls  SetupTime  SolveTime SolveNodes       Sols       Best       Exp3  EpsGreedy        UCB TgtFixRate  Opt  Inf Node Stal  Sol  Usr Othr Actv
+  rens             :          1       1.57       4.56         57          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    1    0    0    0    1
+  rins             :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  mutation         :          1       1.58       5.75         55          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    1    0    0    0    1
+  localbranching   :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  crossover        :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  proximity        :          1       1.51      16.30         77          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    1    0    0    0    1
+  zeroobjective    :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+  dins             :          0       0.00       0.00          0          0          0    0.00000   -1.00000    1.00000      0.900    0    0    0    0    0    0    0    1
+LP                 :       Time      Calls Iterations  Iter/call   Iter/sec  Time-0-It Calls-0-It    ItLimit
+  primal LP        :    2592.63        107          0       0.00       0.00    2592.63        107
+  dual LP          :     584.50       1417      58222      46.69      99.61      40.66        170
+  lex dual LP      :       0.00          0          0       0.00          -
+  barrier LP       :       0.00          0          0       0.00          -       0.00          0
+  resolve instable :     422.93        123       3952      32.13       9.34
+  diving/probing LP:    2160.77        148      56110     379.12      25.97
+  strong branching :    1040.68       1168      70691      60.52      67.93          -          -        103
+    (at root node) :          -          7       1104     157.71          -
+  conflict analysis:      70.73       1149      11484       9.99     162.36
+B&B Tree           :
+  number of runs   :          1
+  nodes            :        345 (207 internal, 138 leaves)
+  feasible leaves  :          0
+  infeas. leaves   :         26
+  objective leaves :        111
+  nodes (total)    :        345 (207 internal, 138 leaves)
+  nodes left       :         31
+  max depth        :         23
+  max depth (total):         23
+  backtracks       :        140 (40.6%)
+  early backtracks :         19 (13.6%)
+  nodes exc. ref.  :          0 (0.0%)
+  delayed cutoffs  :         39
+  repropagations   :        333 (140766 domain reductions, 8 cutoffs)
+  avg switch length:       6.96
+  switching time   :    1418.30
+Root Node          :
+  First LP value   : -2.13162820728030e-13
+  First LP Iters   :        658 (1778.38 Iter/sec)
+  First LP Time    :       0.37
+  Final Dual Bound : +2.30282653515268e+03
+  Final Root Iters :      28273
+  Root LP Estimate : +2.30960529566779e+03
+Solution           :
+  Solutions found  :          7 (4 improvements)
+  First Solution   : +1.01974792244000e+07   (in run 1, after 1 nodes, 47.50 seconds, depth 51, found by <locks>)
+  Gap First Sol.   :   infinite
+  Gap Last Sol.    :       2.07 %
+  Primal Bound     : +2.35140310000008e+03   (in run 1, after 32 nodes, 817.28 seconds, depth 14, found by <relaxation>)
+  Dual Bound       : +2.34329376579985e+03
+  Gap              :       0.35 %
+  Avg. Gap         :       8.30 % (59730.34 primal-dual integral)
+  Tree Data        : 415 nodes (384 visited, 207 inner, 177 leaves, 31 open), progress: 0.9794
+Tree Estimation    :       estim       value       trend  resolution      smooth
+  wbe              :         360           -           -           -           -
+  tree profile     :         903           -           -           -           -
+  gap              :         470     0.99655     0.00006           1         464
+  progress         :         362     0.97937     0.00484           1         369
+  leaf-frequency   :         538     0.46084     0.00042           1         540
+  ssg              :         603     0.03934    -0.00031           1         593
+  open-nodes       :         465    30.00000    -0.53693           1         466
+
+
+SCIP> checksol
+
+check best solution
+  [linear] <R0025>: <C0024>[C] (+0) +<C0771>[C] (+0) +<C1518>[C] (+0) +<C2265>[C] (+0) +<C3012>[C] (+0) +<C3759>[C] (+0) +<C4506>[C] (+0) +<C5253>[C] (+0) +<C6000>[C] (+0) +<C6747>[C] (+0) +<C7494>[C] (+0) +<C8241>[C] (+0) +<C8988>[C] (+0) +<C9735>[C] (+0) +<C10482>[C] (+0) +<C11229>[C] (+0) +<C11976>[C] (+0) +<C12723>[C] (+0) +<C13470>[C] (+0) +<C14217>[C] (-3.70857593e-10) +<C14964>[C] (-4.50928546e-10) +<C15711>[C] (+0) +<C16458>[C] (+0) +<C17205>[C] (-9.70885514e-10) +<C17952>[C] (+0) +<C18699>[C] (-5.43991518e-10) +<C19446>[C] (+0) +<C20193>[C] (+0) +<C20940>[C] (+0) +<C21687>[C] (+0) +<C22434>[C] (+0) +<C23181>[C] (-2.64329003e-10) +<C23928>[C] (+0) +<C24675>[C] (+0) +<C25422>[C] (+0) +<C26169>[C] (+0) +<C26916>[C] (+0) +<C27663>[C] (+0) +<C28410>[C] (+0) +<C29157>[C] (+0) +<C29904>[C] (+0) +<C30651>[C] (+0) +<C31398>[C] (+0) +<C32145>[C] (+0) +<C32892>[C] (+0) +<C33639>[C] (+0) +<C34386>[C] (+0) +<C35133>[C] (+0) +<C35880>[C] (+0) +<C36627>[C] (+0) +<C37374>[C] (+0) +<C38121>[C] (+0) +<C38868>[C] (+0) +<C39615>[C] (+0) +<C40362>[C] (+0) +<C41109>[C] (+0) +<C41856>[C] (+0) +<C42603>[C] (+0) +<C43350>[C] (+0) +<C44097>[C] (+0) +<C44844>[C] (+0) +<C45591>[C] (-6.3529626e-10) +<C46338>[C] (-1.0697363e-09) +<C47085>[C] (+0) +<C47832>[C] (+0) +<C48579>[C] (+0) +<C49326>[C] (+0) +<C50073>[C] (+0) +<C50820>[C] (+0) +<C51567>[C] (+0) +<C52314>[C] (+0) +<C53061>[C] (+0) +<C53808>[C] (+0) +<C54555>[C] (+0) +<C55302>[C] (+0) +<C56049>[C] (+0) +<C56796>[C] (+0) +<C57543>[C] (+0) +<C58290>[C] (+0) +<C59037>[C] (+0) +<C59784>[C] (+0) +<C60531>[C] (+0) +<C61278>[C] (+0) +<C62025>[C] (+0) +<C62772>[C] (+0) +<C63519>[C] (+0) +<C64266>[C] (+0) +<C65013>[C] (+0) +<C65760>[C] (+0) +<C66507>[C] (+0) +<C67254>[C] (+0) +<C68001>[C] (+0) +<C68748>[C] (+0) +<C69495>[C] (+0) +<C70242>[C] (+0) +<C70989>[C] (+0) +<C71736>[C] (+0) +<C72483>[C] (+0) +<C73230>[C] (+0) +<C73977>[C] (+0) +<C74724>[C] (+0) +<C75471>[C] (+0) +<C76218>[C] (+0) +<C76965>[C] (+0) +<C77712>[C] (+0) +<C78459>[C] (+0) +<C79206>[C] (+0) +<C79953>[C] (+0) +<C80700>[C] (+0) +<C81447>[C] (+0) +<C82194>[C] (+0) +<C82941>[C] (+0) +<C83688>[C] (+0) +<C84435>[C] (+0) +<C85182>[C] (+0) +<C85929>[C] (+0) +<C86676>[C] (+0) +<C87423>[C] (+0) +<C88170>[C] (+0) +<C88917>[C] (+0) +<C89664>[C] (+0) +<C90411>[C] (+0) +<C91158>[C] (+0) +<C91905>[C] (+0) +<C92652>[C] (+0) +<C93399>[C] (+0) +<C94146>[C] (+0) +<C94893>[C] (+0) +<C95640>[C] (+0) +<C96387>[C] (+0) +<C97134>[C] (+0) +<C97881>[C] (+0) +<C98628>[C] (+0) +<C99375>[C] (+0) +<C100122>[C] (+0) +<C100869>[C] (+0) +<C101616>[C] (+0) +<C102363>[C] (+0) +<C103110>[C] (+0) +<C103857>[C] (+0) +<C104604>[C] (+0) +<C105351>[C] (+0) +<C106098>[C] (+0) +<C106845>[C] (+0) +<C107592>[C] (+0) +<C108339>[C] (+0) +<C109086>[C] (+0) +<C109833>[C] (+0) +<C110580>[C] (+0) +<C111327>[C] (+0) +<C112074>[C] (+0) +<C112821>[C] (+0) +<C113568>[C] (+0) +<C114315>[C] (+0) +<C115062>[C] (+0) +<C115809>[C] (+0) +<C116556>[C] (+0) +<C117303>[C] (+0) +<C118050>[C] (+0) +<C118797>[C] (+0) +<C119544>[C] (+0) +<C120291>[C] (+0) +<C121038>[C] (+0) +<C121785>[C] (+0) +<C122532>[C] (+0) +<C123279>[C] (+0) +<C124026>[C] (+0) +<C124773>[C] (+0) +<C125520>[C] (+0) +<C126267>[C] (+0) +<C127014>[C] (+0) +<C127761>[C] (+0) +<C128508>[C] (+0) +<C129255>[C] (+0) +<C130002>[C] (+0) +<C130749>[C] (+0) +<C131496>[C] (+0) +<C132243>[C] (+0) +<C132990>[C] (+0) +<C133737>[C] (+0) +<C134484>[C] (+0) +<C135231>[C] (+0) +<C135978>[C] (+0) +<C136725>[C] (+0) +<C137472>[C] (+0) +<C138219>[C] (+0) +<C138966>[C] (+0) +<C139713>[C] (+0) +<C140460>[C] (+0) +<C141207>[C] (+0) +<C141954>[C] (+0) +<C142701>[C] (+0) +<C143448>[C] (+0) +<C144195>[C] (+0) +<C144942>[C] (+0) +<C145689>[C] (+0) +<C146436>[C] (+0) +<C147183>[C] (+0) +<C147930>[C] (+0) +<C148677>[C] (+0) +<C149424>[C] (+0) +<C150171>[C] (+0) +<C150918>[C] (+0) +<C151665>[C] (+0) +<C152412>[C] (+0) +<C153159>[C] (+0) +<C153906>[C] (+0) +<C154653>[C] (+0) +<C155400>[C] (+0) +<C156147>[C] (+0) +<C156894>[C] (+0) +<C157641>[C] (+0) +<C158388>[C] (+0) +<C159135>[C] (+0) +<C159882>[C] (+0) +<C160629>[C] (+0) +<C161376>[C] (+0) +<C162123>[C] (+0) +<C162870>[C] (+0) +<C163617>[C] (+0) +<C164364>[C] (-8.05499667e-10) +<C165111>[C] (+0) +<C165858>[C] (-2.82265235e-10) +<C166605>[C] (+0) +<C167352>[C] (+0) +<C168099>[C] (+0) +<C168846>[C] (+0) +<C169593>[C] (+0) +<C170340>[C] (+0) +<C171087>[C] (+0) +<C171834>[C] (+0) +<C172581>[C] (+0) +<C173328>[C] (+0) +<C174075>[C] (+0) +<C174822>[C] (+0) +<C175569>[C] (+0) +<C176316>[C] (+0) +<C177063>[C] (+0) +<C177810>[C] (+0) +<C178557>[C] (+0) +<C179304>[C] (+0) +<C180051>[C] (+0) +<C180798>[C] (+0) +<C181545>[C] (+0) +<C182292>[C] (+0) +<C183039>[C] (+0) +<C183786>[C] (+0) +<C184533>[C] (+0) +<C185280>[C] (+0) +<C186027>[C] (+0) +<C186774>[C] (+0) +<C187521>[C] (+0) +<C188268>[C] (+0) +<C189015>[C] (+0) +<C189762>[C] (+0) +<C190509>[C] (+0) +<C191256>[C] (+0) +<C192003>[C] (+0) +<C192750>[C] (+0) +<C193497>[C] (+0) +<C194244>[C] (+0) +<C194991>[C] (+0) +<C195738>[C] (+0) +<C196485>[C] (-2.48419951e-10) +<C197232>[C] (-4.78005436e-10) +<C197979>[C] (+0) +<C198726>[C] (+0) +<C199473>[C] (+0) +<C200220>[C] (+0) +<C200967>[C] (+0) +<C201714>[C] (+0) +<C202461>[C] (-2.6094682e-10) +<C203208>[C] (+0) +<C203955>[C] (+0) +<C204702>[C] (+0) +<C205449>[C] (+0) +<C206196>[C] (+0) +<C206943>[C] (+0) +<C207690>[C] (+0) +<C208437>[C] (+0) +<C209184>[C] (+0) +<C209931>[C] (+0) +<C210678>[C] (+0) +<C211425>[C] (+0) +<C212172>[C] (+0) +<C212919>[C] (+0) +<C213666>[C] (+0) +<C214413>[C] (+0) +<C215160>[C] (+0) +<C215907>[C] (+0) +<C216654>[C] (+0) +<C217401>[C] (+0) +<C218148>[C] (+0) +<C218895>[C] (+0) +<C219642>[C] (+0) +<C220389>[C] (+0) +<C221136>[C] (+0) +<C221883>[C] (+0) +<C222630>[C] (+0) +<C223377>[C] (+0) +<C224124>[C] (+0) +<C224871>[C] (+0) +<C225618>[C] (+0) +<C226365>[C] (+0) +<C227112>[C] (+0) +<C227859>[C] (+0) +<C228606>[C] (+0) +<C229353>[C] (+0) +<C230100>[C] (+0) +<C230847>[C] (+0) +<C231594>[C] (+0) +<C232341>[C] (+0) +<C233088>[C] (+0) +<C233835>[C] (+0) +<C234582>[C] (+0) +<C235329>[C] (+0) +<C236076>[C] (-3.05056212e-11) +<C236823>[C] (-1.95992313e-10) +<C237570>[C] (+0) +<C238317>[C] (+0) +<C239064>[C] (+0) +<C239811>[C] (+0) +<C240558>[C] (+0) +<C241305>[C] (+0) +<C242052>[C] (+0) +<C242799>[C] (+0) +<C243546>[C] (+0) +<C244293>[C] (+0) +<C245040>[C] (+0) +<C245787>[C] (+0) +<C246534>[C] (+0) +<C247281>[C] (+0) +<C248028>[C] (+0) +<C248775>[C] (+0) +<C249522>[C] (+0) +<C250269>[C] (+0) +<C251016>[C] (+0) +<C251763>[C] (+0) +<C252510>[C] (+0) +<C253257>[C] (+0) +<C254004>[C] (+0) +<C254751>[C] (+0) +<C255498>[C] (+0) +<C256245>[C] (+0) +<C256992>[C] (+0) +<C257739>[C] (+0) +<C258486>[C] (+0) +<C259233>[C] (+0) +<C259980>[C] (+0) +<C260727>[C] (+0) +<C261474>[C] (+0) +<C262221>[C] (+0) +<C262968>[C] (+0) +<C263715>[C] (+0) +<C264462>[C] (+0) +<C265209>[C] (+0) +<C265956>[C] (+0) +<C266703>[C] (+0) +<C267450>[C] (+0) +<C268197>[C] (+0) +<C268944>[C] (+0) +<C269691>[C] (+0) +<C270438>[C] (+0) +<C271185>[C] (+0) +<C271932>[C] (+0) +<C272679>[C] (+0) +<C273426>[C] (+0) +<C274173>[C] (+0) +<C274920>[C] (+0) +<C275667>[C] (+0) +<C276414>[C] (+0) +<C277161>[C] (+0) +<C277908>[C] (+0) +<C278655>[C] (+0) +<C279402>[C] (+0) +<C280149>[C] (+0) +<C280896>[C] (+0) +<C281643>[C] (+0) +<C282390>[C] (+0) +<C283137>[C] (+0) +<C283884>[C] (+0) +<C284631>[C] (+0) +<C285378>[C] (+0) +<C286125>[C] (+0) +<C286872>[C] (+0) +<C287619>[C] (+0) +<C288366>[C] (+0) +<C289113>[C] (+0) +<C289860>[C] (+0) +<C290607>[C] (+0) +<C291354>[C] (+0) +<C292101>[C] (+0) +<C292848>[C] (+0) +<C293595>[C] (+0) +<C294342>[C] (+0) +<C295089>[C] (+0) +<C295836>[C] (+0) +<C296583>[C] (+0) +<C297330>[C] (+0) +<C298077>[C] (+0) +<C298824>[C] (+0) +<C299571>[C] (+0) +<C300318>[C] (+0) +<C301065>[C] (+0) +<C301812>[C] (+0) +<C302559>[C] (+0) +<C303306>[C] (+0) +<C304053>[C] (+0) +<C304800>[C] (+0) +<C305547>[C] (+0) +<C306294>[C] (+0) +<C307041>[C] (+0) +<C307788>[C] (+0) +<C308535>[C] (+0) +<C309282>[C] (+0) +<C310029>[C] (+0) +<C310776>[C] (+0) +<C311523>[C] (+0) +<C312270>[C] (+0) +<C313017>[C] (+0) +<C313764>[C] (+0) +<C314511>[C] (+0) +<C315258>[C] (+0) +<C316005>[C] (+0) +<C316752>[C] (+0) +<C317499>[C] (+0) +<C318246>[C] (+0) +<C318993>[C] (+0) +<C319740>[C] (+0) +<C320487>[C] (+0) +<C321234>[C] (+0) +<C321981>[C] (+0) +<C322728>[C] (+0) +<C323475>[C] (+0) +<C324222>[C] (+0) +<C324969>[C] (+0) +<C325716>[C] (+0) +<C326463>[C] (+0) +<C327210>[C] (+0) +<C327957>[C] (+0) +<C328704>[C] (+0) +<C329451>[C] (+0) +<C330198>[C] (+0) +<C330945>[C] (+0) +<C331692>[C] (+0) +<C332439>[C] (+0) +<C333186>[C] (+0) +<C333933>[C] (+0) +<C334680>[C] (+0) +<C335427>[C] (+0) +<C336174>[C] (+0) +<C336921>[C] (+0) +<C337668>[C] (+0) +<C338415>[C] (+0) +<C339162>[C] (+0) +<C339909>[C] (+0) +<C340656>[C] (+0) +<C341403>[C] (+0) +<C342150>[C] (+0) +<C342897>[C] (+0) +<C343644>[C] (+0) +<C344391>[C] (+0) +<C345138>[C] (+0) +<C345885>[C] (+0) +<C346632>[C] (+0) +<C347379>[C] (+0) +<C348126>[C] (+0) +<C348873>[C] (+0) +<C349620>[C] (+0) +<C350367>[C] (+0) +<C351114>[C] (+0) +<C351861>[C] (+0) +<C352608>[C] (+0) +<C353355>[C] (+0) +<C354102>[C] (+0) +<C354849>[C] (+0) +<C355596>[C] (+0) +<C356343>[C] (+0) +<C357090>[C] (+0) +<C357837>[C] (+0) +<C358584>[C] (+0) +<C359331>[C] (+0) +<C360078>[C] (+0) +<C360825>[C] (+0) +<C361572>[C] (+0) +<C362319>[C] (+0) +<C363066>[C] (+0) +<C363813>[C] (+0) +<C364560>[C] (+0) +<C365307>[C] (+0) +<C366054>[C] (+0) +<C366801>[C] (+0) +<C367548>[C] (+0) +<C368295>[C] (+0) +<C369042>[C] (+0) +<C369789>[C] (+0) +<C370536>[C] (+0) +<C371283>[C] (+0) +<C372030>[C] (+0) +<C372777>[C] (+0) +<C373524>[C] (+0) +<C374271>[C] (+0) +<C375018>[C] (+0) +<C375765>[C] (+0) +<C376512>[C] (+0) +<C377259>[C] (+0) +<C378006>[C] (+0) +<C378753>[C] (+0) +<C379500>[C] (+0) +<C380247>[C] (+0) +<C380994>[C] (+0) +<C381741>[C] (+0) +<C382488>[C] (+0) +<C383235>[C] (+0) +<C383982>[C] (+0) +<C384729>[C] (+0) +<C385476>[C] (+0) +<C386223>[C] (+0) +<C386970>[C] (+0) +<C387717>[C] (+0) +<C388464>[C] (+0) +<C389211>[C] (+0) +<C389958>[C] (+0) +<C390705>[C] (+0) +<C391452>[C] (+0) +<C392199>[C] (+0) +<C392946>[C] (+0) +<C393693>[C] (+0) +<C394440>[C] (+0) +<C395187>[C] (+0) +<C395934>[C] (+0) +<C396681>[C] (+0) +<C397428>[C] (+0) +<C398175>[C] (+0) +<C398922>[C] (+0) +<C399669>[C] (+0) +<C400416>[C] (+0) +<C401163>[C] (+0) +<C401910>[C] (+0) +<C402657>[C] (+0) +<C403404>[C] (+0) +<C404151>[C] (+0) +<C404898>[C] (+0) +<C405645>[C] (+0) +<C406392>[C] (+0) +<C407139>[C] (+0) +<C407886>[C] (+0) +<C408633>[C] (+0) +<C409380>[C] (+0) +<C410127>[C] (+0) +<C410874>[C] (+0) +<C411621>[C] (+0) +<C412368>[C] (+0) +<C413115>[C] (+0) +<C413862>[C] (+0) +<C414609>[C] (+0) +<C415356>[C] (+0) +<C416103>[C] (+0) +<C416850>[C] (+0) +<C417597>[C] (+0) +<C418344>[C] (+0) +<C419091>[C] (+0) +<C419838>[C] (+0) +<C420585>[C] (+0) +<C421332>[C] (+0) +<C422079>[C] (+0) +<C422826>[C] (+0) +<C423573>[C] (+0) +<C424320>[C] (+0) +<C425067>[C] (+0) +<C425814>[C] (+0) +<C426561>[C] (+0) +<C427308>[C] (+0) +<C428055>[C] (+0) +<C428802>[C] (+0) +<C429549>[C] (+0) +<C430296>[C] (+0) +<C431043>[C] (+0) +<C431790>[C] (+0) +<C432537>[C] (+0) +<C433284>[C] (+0) +<C434031>[C] (+0) +<C434778>[C] (+0) +<C435525>[C] (+0) +<C436272>[C] (+0) +<C437019>[C] (+0) +<C437766>[C] (+0) +<C438513>[C] (+0) +<C439260>[C] (+0) +<C440007>[C] (+0) +<C440754>[C] (+0) +<C441501>[C] (+0) +<C442248>[C] (+0) +<C442995>[C] (+0) +<C443742>[C] (-4.14019265e-10) +<C444489>[C] (+0) +<C445236>[C] (+0) +<C445983>[C] (+0) +<C446730>[C] (+0) +<C447477>[C] (+0) +<C448224>[C] (+0) +<C448971>[C] (+0) +<C449718>[C] (+0) +<C450465>[C] (+0) +<C451212>[C] (+0) +<C451959>[C] (-1.97751149e-10) +<C452706>[C] (+0) +<C453453>[C] (+0) +<C454200>[C] (+0) +<C454947>[C] (+0) +<C455694>[C] (+0) +<C456441>[C] (+0) +<C457188>[C] (+0) +<C457935>[C] (+0) +<C458682>[C] (+0) +<C459429>[C] (+0) +<C460176>[C] (+0) +<C460923>[C] (+0) +<C461670>[C] (+0) +<C462417>[C] (+0) +<C463164>[C] (+0) +<C463911>[C] (+0) +<C464658>[C] (+0) +<C465405>[C] (+0) +<C466152>[C] (+0) +<C466899>[C] (+0) +<C467646>[C] (+0) +<C468393>[C] (+0) +<C469140>[C] (+0) +<C469887>[C] (+0) +<C470634>[C] (+0) +<C471381>[C] (+0) +<C472128>[C] (+0) +<C472875>[C] (+0) +<C473622>[C] (+0) +<C474369>[C] (+0) +<C475116>[C] (+0) +<C475863>[C] (+0) +<C476610>[C] (+0) +<C477357>[C] (+0) +<C478104>[C] (+0) +<C478851>[C] (+0) +<C479598>[C] (+0) +<C480345>[C] (+0) +<C481092>[C] (+0) +<C481839>[C] (+0) +<C482586>[C] (+0) +<C483333>[C] (+0) +<C484080>[C] (+0) +<C484827>[C] (+0) +<C485574>[C] (+0) +<C486321>[C] (+0) +<C487068>[C] (+0) +<C487815>[C] (+0) +<C488562>[C] (+0) +<C489309>[C] (+0) +<C490056>[C] (+0) +<C490803>[C] (+0) +<C491550>[C] (+0) +<C492297>[C] (+0) +<C493044>[C] (+0) +<C493791>[C] (+0) +<C494538>[C] (+0) +<C495285>[C] (+0) +<C496032>[C] (+0) +<C496779>[C] (+0) +<C497526>[C] (+0) +<C498273>[C] (+0) +<C499020>[C] (+0) +<C499767>[C] (+0) +<C500514>[C] (+0) +<C501261>[C] (+0) +<C502008>[C] (+0) +<C502755>[C] (+0) +<C503502>[C] (+0) +<C504249>[C] (+0) +<C504996>[C] (+0) +<C505743>[C] (+0) +<C506490>[C] (+0) +<C507237>[C] (+0) +<C507984>[C] (+0) +<C508731>[C] (+0) +<C509478>[C] (+0) +<C510225>[C] (+0) +<C510972>[C] (+0) +<C511719>[C] (+0) +<C512466>[C] (+0) +<C513213>[C] (+0) +<C513960>[C] (+0) +<C514707>[C] (+0) +<C515454>[C] (+0) +<C516201>[C] (+0) +<C516948>[C] (+0) +<C517695>[C] (+0) +<C518442>[C] (+0) +<C519189>[C] (+0) +<C519936>[C] (+0) +<C520683>[C] (+0) +<C521430>[C] (+0) +<C522177>[C] (+0) +<C522924>[C] (+0) +<C523671>[C] (+0) +<C524418>[C] (+0) +<C525165>[C] (+0) +<C525912>[C] (+0) +<C526659>[C] (+0) +<C527406>[C] (+0) +<C528153>[C] (+0) +<C528900>[C] (+0) +<C529647>[C] (+0) +<C530394>[C] (+0) +<C531141>[C] (+0) +<C531888>[C] (+0) +<C532635>[C] (+0) +<C533382>[C] (+0) +<C534129>[C] (+0) +<C534876>[C] (+0) +<C535623>[C] (+0) +<C536370>[C] (+0) +<C537117>[C] (+0) +<C537864>[C] (+0) +<C538611>[C] (+0) +<C539358>[C] (+0) +<C540105>[C] (+0) +<C540852>[C] (+0) +<C541599>[C] (+0) +<C542346>[C] (+0) +<C543093>[C] (+0) +<C543840>[C] (+0) +<C544587>[C] (+0) +<C545334>[C] (+0) +<C546081>[C] (+0) +<C546828>[C] (+0) +<C547575>[C] (+0) +<C548322>[C] (+0) +<C549069>[C] (+0) -999999<C549816>[B] (-5.04225144e-12) <= 0;
+;
+violation: right hand side is violated by 5.03502696396952e-06
+Violation          :    absolute    relative
+  bounds           : 2.83359e-09 2.83359e-09
+  integrality      : 9.15710e-12           -
+  LP rows          : 5.03503e-06 5.03503e-06
+  constraints      : 5.03503e-06 5.03503e-06
+
+SCIP> write sol /local/tmp/bzfhende-tmpdir/bzfhende.MMMc.338_neos-848589.scip.M6440.enable_treeprofile.sol
+
+written solution information to file </local/tmp/bzfhende-tmpdir/bzfhende.MMMc.338_neos-848589.scip.M640.enable_treeprofile.sol>
+
+SCIP> quit
+
+Disabling tree profile data collection
+Read MPS: 1
+MIP has 550539 vars and 1484 constraints
+Read SOL: 1
+Objective value computed by solver: 2351.40310000008
+
+Integrality tolerance: 1/10000
+Linear tolerance: 1/10000
+Objective tolerance: 1/10000
+
+Check SOL: Integrality 1 Constraints 1 Objective 1
+Maximum violations: Integrality 1.104e-11 Constraints 5.811934752151489e-09 Objective 7.722874678358786e-10
+@04 1566524696
+-----------------------------
+Fr 23. Aug 03:44:56 CEST 2019
+-----------------------------
+
+=ready=
