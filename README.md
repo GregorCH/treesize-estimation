@@ -24,3 +24,6 @@ Each directory contains a README.md with more specific information about the scr
 * the directory `des_calibration` contains the scripts for the calibration of
   the estimates based on double exponential smoothing (Section 5 of the article).
   Please refer to the [README.md](des_calibration/README.md) within the directory for more information.
+* the directory `training_evaluation` bundles the scripts for training ensemble methods from
+  the atomic estimators, and a computational comparison based on SCIP runs.
+  Please refer to the [README.md](training_evaluation/README.md) within the directory for more information.
