@@ -1,13 +1,6 @@
 # R Scripts for Branch-and-Bound Tree Size Estimation
 
-This repository contains R-scripts to transform time-series data observed during MIP branch-and-bound search into treesize estimations.
-
-## Overview
-
-During Branch-and-Bound Search, a search tree is explored, whose size can be exponential in the size (number of variables) of the input problem. It is a difficult problem to estimate the time remaining until the search completes.
-
-Even before the search is completed, information gathered at *leaves* (terminal nodes) of the search tree may give valuable insights into the current progress of the search.
-The scripts in this repository transform raw time series data of actual MIP search trees into data frames that can be used to assess the suitability of forecasting techniques on those time series.
+This directory contains R scripts to transform time-series data observed during MIP branch-and-bound search into treesize estimations.
 
 ## Structure
 
